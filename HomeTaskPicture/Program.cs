@@ -10,10 +10,10 @@ namespace HomeTaskPicture
             int pictureInColuum = 3;
             int howMuchColumWeCanDo = allPicture / pictureInColuum;
             Console.WriteLine($"Всего мы сможем сделать {howMuchColumWeCanDo} колонок");
-            
+
             //int howMuchWeDone = howMuchColumWeCanDo * pictureInColuum;
             //int pictureLose = allPicture - howMuchWeDone;
-           
+
             int pictureLose = allPicture / (howMuchColumWeCanDo * 3);
 
             Console.WriteLine($"Осталось лишней {pictureLose} картинка");
