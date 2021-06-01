@@ -18,9 +18,9 @@ namespace IJunior
             int howMuchGoldChange = Convert.ToInt32(Console.ReadLine());
             double crystalResult = howMuchGoldChange * crystalPrice;
             Console.WriteLine("готово,вы отдали " + howMuchGoldChange + " золотых монеток и взамен получили " + Math.Round(crystalResult, 2) + " кристалов");
-            int moneyNowWeHave = myGold - howMuchGoldChange;
-            double crystalNowWehave = howMuchCrystalWaHave - Math.Round(crystalResult, 2);
-            Console.WriteLine("У нас осталось " + moneyNowWeHave + " золотых монеток и " + crystalNowWehave + " кристаллов");
+             myGold -= howMuchGoldChange;
+            howMuchCrystalWaHave -=  Math.Round(crystalResult, 2);
+            Console.WriteLine("У нас осталось " + myGold + " золотых монеток и " + howMuchCrystalWaHave + " кристаллов");
             
 
             
