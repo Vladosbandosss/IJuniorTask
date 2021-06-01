@@ -12,12 +12,15 @@ namespace IJunior
             Console.WriteLine("у меня есть " + myGold + " золотых монет");
             double crystalPrice = 2.55;
             Console.WriteLine("Курс обмена составляет "+ crystalPrice + " за 1 золотую монету");
+            double howMuchCrystalWaHave = 100;
+            Console.WriteLine("У меня есть " + howMuchCrystalWaHave + "кристалов");
             Console.WriteLine("Сколько золота хотите поменять?");
             int howMuchGoldChange = Convert.ToInt32(Console.ReadLine());
             double crystalResult = howMuchGoldChange * crystalPrice;
             Console.WriteLine("готово,вы отдали " + howMuchGoldChange + " золотых монеток и взамен получили " + Math.Round(crystalResult, 2) + " кристалов");
             int moneyNowWeHave = myGold - howMuchGoldChange;
-            Console.WriteLine("У нас осталось " + moneyNowWeHave + " золотых монеток");
+            double crystalNowWehave = howMuchCrystalWaHave - Math.Round(crystalResult, 2);
+            Console.WriteLine("У нас осталось " + moneyNowWeHave + " золотых монеток и " + crystalNowWehave + " кристаллов");
             
 
             
