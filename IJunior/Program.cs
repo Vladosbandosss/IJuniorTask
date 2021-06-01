@@ -8,9 +8,9 @@ namespace IJunior
         {
          
             Console.WriteLine("Введите количество людей перед вами");
-            int countOfPeople = Convert.ToInt32(Console.ReadLine());
-            int timeresultInMinuters = countOfPeople * 10;
-            TimeSpan findRes = TimeSpan.FromMinutes(timeresultInMinuters);
+            int countOfPeopleBeforeMe = Convert.ToInt32(Console.ReadLine());
+            int minutesOfWaiTing = countOfPeopleBeforeMe * 10;
+            TimeSpan findRes = TimeSpan.FromMinutes(minutesOfWaiTing);
             Console.WriteLine("Вам стоять " + findRes.Hours + " часов " + findRes.Minutes + " минут");
 
             
