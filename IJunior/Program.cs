@@ -6,19 +6,15 @@ namespace IJunior
     {
         static void Main(string[] args)
         {
+            string NameThatWillBePrinted = "Vlad";
 
-            Console.WriteLine("Введите ваше имя");
-            string name = Console.ReadLine();
-            Console.WriteLine("Введите ваш возраст");
-            int age = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите ваше место работы");
-            string placeOfWork = Console.ReadLine();
-            Console.WriteLine("Введите вашу зарплату");
-            int salary = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Спасибо,вывожу информацию о вас");
-            Console.WriteLine($"Вас зовут {name}, вам {age} лет. Вы работаете {placeOfWork} ,а ваша зарплата {salary} ");
-            Console.WriteLine($"Кстати через год вам будет {age+1} и если к вашей зарплате прибавить 200 долларов ,то вы будете получать {salary+200}");
-
+            Console.WriteLine($"Здравствуйте,я выведу слово {NameThatWillBePrinted} привет столько раз сколько вы захотите");
+            Console.WriteLine("Сколько раз вывести?");
+            int countOfRepeat = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < countOfRepeat; i++)
+            {
+                Console.WriteLine(NameThatWillBePrinted);
+            }
             
             
 
