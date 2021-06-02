@@ -6,7 +6,7 @@ namespace IJunior
     {
         static void Main(string[] args)
         {
-            string NameThatWillBePrinted = "Vlad";
+            string NameThatWillBePrinted = "Vladd";
 
             Console.WriteLine($"Здравствуйте,я выведу слово {NameThatWillBePrinted} привет столько раз сколько вы захотите");
             Console.WriteLine("Сколько раз вывести?");
