@@ -6,15 +6,21 @@ namespace IJunior
     {
         static void Main(string[] args)
         {
-            //программа выводит 14 чисел начиная с 7,каждое последующее число больше
-            //предыдущего на 7
-            int number = 7;
-            for (int i = 0; i < 14; i++)
+            Console.WriteLine("Здравствуй,ты ввудешь имя и символ а я красиво отрисую)");
+            Console.WriteLine("Введи имя");
+            string name = Console.ReadLine();
+            Console.WriteLine("Введи символ");
+            string symbol = Console.ReadLine();
+            for (int i = 0; i < name.Length; i++)
             {
-                Console.WriteLine(number);
-                number += 7;
+                Console.Write(symbol + " ");
             }
-            Console.WriteLine("числа выведены,программа завершена");
+            Console.WriteLine();
+            Console.WriteLine($"{symbol}{name}{symbol}");
+            for (int i = 0; i < name.Length; i++)
+            {
+                Console.Write(symbol + " ");
+            }
 
         }
     }
