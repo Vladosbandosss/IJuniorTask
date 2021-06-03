@@ -6,21 +6,29 @@ namespace IJunior
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Здравствуй,ты ввудешь имя и символ а я красиво отрисую)");
-            Console.WriteLine("Введи имя");
-            string name = Console.ReadLine();
-            Console.WriteLine("Введи символ");
-            string symbol = Console.ReadLine();
-            for (int i = 0; i < name.Length; i++)
+            string passworToAccount = "qwert";
+            Console.WriteLine("Приветствую,введи пароль,что б получить доступ,у тебя 3 попытки");
+            int tryCount = 3;
+            while (tryCount > 0)
             {
-                Console.Write(symbol + " ");
+                string pass = Console.ReadLine();
+                if (passworToAccount == pass)
+                {
+                    Console.WriteLine("Пароль верный открываю доступ");
+                    break;
+                }
+                else
+                {
+                    tryCount--;
+                    if (tryCount == 0)
+                    {
+                        break;
+                    }
+                    Console.WriteLine($"Неправильно у тебя осталось {tryCount} попыток");
+                }
+
             }
-            Console.WriteLine();
-            Console.WriteLine($"{symbol}{name}{symbol}");
-            for (int i = 0; i < name.Length; i++)
-            {
-                Console.Write(symbol + " ");
-            }
+            Console.WriteLine("Программа завершенна");
 
         }
     }
