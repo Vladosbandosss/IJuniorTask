@@ -22,37 +22,31 @@ namespace IJunior
                 Console.WriteLine("4- обмен USD на RUB!1 доллар = 2 рубля");
                 Console.WriteLine("5- обмен RUB на USD!1 рубль = 0.5 доллара");
                 Console.WriteLine("6- обмен RUB на EUR!1 рубль = 0.25 евро");
-                Console.WriteLine("7 выйти с обмена");
+                Console.WriteLine("Любая другая цифра заканчиваю работу");
                 int ourChoose = Convert.ToInt32(Console.ReadLine());
-                if (ourChoose == 7)
-                {
-                    makeChange = false;
-                    break;
-                }
-                else
-                {
+               
                     switch (ourChoose)
                     {
                         case 1:
                             Console.WriteLine("Сколько евро хотите поменять на доллары?");
-                            int howMuchWeWantChangeEurInUsd = Convert.ToInt32(Console.ReadLine());
-                            int exchangeEURinUsd = howMuchWeWantChangeEurInUsd * 2;
-                            myEur -= howMuchWeWantChangeEurInUsd;
+                            int EurInUsd = Convert.ToInt32(Console.ReadLine());
+                            int exchangeEURinUsd = EurInUsd * 2;
+                            myEur -= EurInUsd;
                             myUsd += exchangeEURinUsd;
                             Console.WriteLine("Готово");
                            break;
                         case 2:
                             Console.WriteLine("Сколько евро хотите поменять на рубли?");
-                            int howMuchWeWantChangeEurInRub = Convert.ToInt32(Console.ReadLine());
-                            int exchangeEurInRub = howMuchWeWantChangeEurInRub * 4;
-                            myEur -= howMuchWeWantChangeEurInRub;
+                            int EurInRub = Convert.ToInt32(Console.ReadLine());
+                            int exchangeEurInRub = EurInRub * 4;
+                            myEur -= EurInRub;
                             myRub += exchangeEurInRub;
                             break;
                         case 3:
                             Console.WriteLine("Сколько долларов хотите поменять на евро?");
-                            int howMuchWeWantChangeUsdInEur = Convert.ToInt32(Console.ReadLine());
-                            double exchangeUsdInEUR = howMuchWeWantChangeUsdInEur * 0.5;
-                            myUsd -= howMuchWeWantChangeUsdInEur;
+                            int UsdInEur = Convert.ToInt32(Console.ReadLine());
+                            double exchangeUsdInEUR = UsdInEur * 0.5;
+                            myUsd -= UsdInEur;
                             myEur += exchangeUsdInEUR;
                             break;
                         case 4:
@@ -64,23 +58,26 @@ namespace IJunior
                             break;
                         case 5:
                             Console.WriteLine("Сколько рублей хотите поменять на доллары?");
-                            int howMuchWeWantChangeRubleInUsd = Convert.ToInt32(Console.ReadLine());
-                            double exchangeRubleInUsd = howMuchWeWantChangeRubleInUsd * 0.5;
-                            myRub -= howMuchWeWantChangeRubleInUsd;
+                            int RubleInUsd = Convert.ToInt32(Console.ReadLine());
+                            double exchangeRubleInUsd = RubleInUsd * 0.5;
+                            myRub -= RubleInUsd;
                             myUsd += exchangeRubleInUsd;
                             break;
                         case 6:
                             Console.WriteLine("Сколько рублей хотите поменять на евро?");
-                            int howMuchWeWantChangeRubleInEur = Convert.ToInt32(Console.ReadLine());
-                            double exchangeRubleInEur = howMuchWeWantChangeRubleInEur * 0.25;
-                            myRub -= howMuchWeWantChangeRubleInEur;
+                            int RubleInEur = Convert.ToInt32(Console.ReadLine());
+                            double exchangeRubleInEur = RubleInEur * 0.25;
+                            myRub -= RubleInEur;
                             myEur += exchangeRubleInEur;
                             break;
 
                         default:
-                            Console.WriteLine("Ввели непонятную хрень");
+                            Console.WriteLine("Выхожу с паботы");
+                        makeChange = false;
                             break;
                     }
+                Console.WriteLine("Работа окончена");
+                
                 }
                
 
@@ -100,4 +97,4 @@ namespace IJunior
            
         }
     }
-}
+
