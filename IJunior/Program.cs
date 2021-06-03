@@ -29,45 +29,45 @@ namespace IJunior
                     {
                         case 1:
                             Console.WriteLine("Сколько евро хотите поменять на доллары?");
-                            int EurInUsd = Convert.ToInt32(Console.ReadLine());
-                            int exchangeEURinUsd = EurInUsd * 2;
-                            myEur -= EurInUsd;
+                            int eurInUsd = Convert.ToInt32(Console.ReadLine());
+                            int exchangeEURinUsd = eurInUsd * 2;
+                            myEur -= eurInUsd;
                             myUsd += exchangeEURinUsd;
                             Console.WriteLine("Готово");
                            break;
                         case 2:
                             Console.WriteLine("Сколько евро хотите поменять на рубли?");
-                            int EurInRub = Convert.ToInt32(Console.ReadLine());
-                            int exchangeEurInRub = EurInRub * 4;
-                            myEur -= EurInRub;
+                            int eurInRub = Convert.ToInt32(Console.ReadLine());
+                            int exchangeEurInRub = eurInRub * 4;
+                            myEur -= eurInRub;
                             myRub += exchangeEurInRub;
                             break;
                         case 3:
                             Console.WriteLine("Сколько долларов хотите поменять на евро?");
-                            int UsdInEur = Convert.ToInt32(Console.ReadLine());
-                            double exchangeUsdInEUR = UsdInEur * 0.5;
-                            myUsd -= UsdInEur;
+                            int usdInEur = Convert.ToInt32(Console.ReadLine());
+                            double exchangeUsdInEUR = usdInEur * 0.5;
+                            myUsd -= usdInEur;
                             myEur += exchangeUsdInEUR;
                             break;
                         case 4:
                             Console.WriteLine("Сколько долларов хотите поменять на рубли?");
-                            int howMuchWeWantChangeUsdInRuble = Convert.ToInt32(Console.ReadLine());
-                            double exchangrUsdInRub = howMuchWeWantChangeUsdInRuble * 2;
-                            myUsd -= howMuchWeWantChangeUsdInRuble;
+                            int usdInRuble = Convert.ToInt32(Console.ReadLine());
+                            double exchangrUsdInRub = usdInRuble * 2;
+                            myUsd -= usdInRuble;
                             myRub += exchangrUsdInRub;
                             break;
                         case 5:
                             Console.WriteLine("Сколько рублей хотите поменять на доллары?");
-                            int RubleInUsd = Convert.ToInt32(Console.ReadLine());
-                            double exchangeRubleInUsd = RubleInUsd * 0.5;
-                            myRub -= RubleInUsd;
+                            int rubleInUsd = Convert.ToInt32(Console.ReadLine());
+                            double exchangeRubleInUsd = rubleInUsd * 0.5;
+                            myRub -= rubleInUsd;
                             myUsd += exchangeRubleInUsd;
                             break;
                         case 6:
                             Console.WriteLine("Сколько рублей хотите поменять на евро?");
-                            int RubleInEur = Convert.ToInt32(Console.ReadLine());
-                            double exchangeRubleInEur = RubleInEur * 0.25;
-                            myRub -= RubleInEur;
+                            int rubleInEur = Convert.ToInt32(Console.ReadLine());
+                            double exchangeRubleInEur = rubleInEur * 0.25;
+                            myRub -= rubleInEur;
                             myEur += exchangeRubleInEur;
                             break;
 
