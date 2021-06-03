@@ -6,30 +6,67 @@ namespace IJunior
     {
         static void Main(string[] args)
         {
-            string passworToAccount = "qwert";
-            Console.WriteLine("Приветствую,введи пароль,что б получить доступ,у тебя 3 попытки");
-            int tryCount = 3;
-            while (tryCount > 0)
+            Random random = new Random();
+            int heroHelth = 100;
+            int heroArmor = 20;
+            int heroFirstAttack = 40;
+            int heroSecondAttack = 20;
+            int heroThirdAttach = 30;
+
+            int enemyHealth = 200;
+            int enemyFirstAttack = 30;
+            int enemySecondAttack = 30;
+            int enemyThirdAttack = 35;
+
+            int heroHelpHelth = 30;
+            int enemyHelpHealth = 30;
+
+            bool fight = true;
+            while (fight)
             {
-                string pass = Console.ReadLine();
-                if (passworToAccount == pass)
+                int useAttack = random.Next(1, 4);
+                //Console.WriteLine($"захожу ударом {useAttack}");
+
+                switch (useAttack)
                 {
-                    Console.WriteLine("Пароль верный открываю доступ");
+                    case 1:
+                        heroHelth -= enemyFirstAttack - heroArmor - heroHelpHelth;
+                        enemyHealth -= heroFirstAttack;
+                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                        break;
+                    case 2:
+                        heroHelth -= enemySecondAttack - heroArmor;
+                        enemyHealth -= heroSecondAttack;
+                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                        break;
+                    case 3:
+                        heroHelth -= enemyThirdAttack - heroArmor;
+                        enemyHealth -= heroThirdAttach - enemyHelpHealth;
+                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                        break;
+                 }
+
+                if (heroHelth <= 0 && enemyHealth <= 0)
+                {
+                    Console.WriteLine("Бой окончен ничья");
+                    fight = false;
                     break;
                 }
-                else
+                if (heroHelth <= 0 && enemyHealth > 0)
                 {
-                    tryCount--;
-                    if (tryCount == 0)
-                    {
-                        break;
-                    }
-                    Console.WriteLine($"Неправильно у тебя осталось {tryCount} попыток");
+                    Console.WriteLine("Бобедил враг");
+                    fight = false;
+                    break;
                 }
+                if (heroHelth >= 0 && enemyHealth <= 0)
+                {
+                    Console.WriteLine("Бобедил герой");
+                    fight = false;
+                    break;
+                }
+             }
 
-            }
-            Console.WriteLine("Программа завершенна");
-
+            Console.WriteLine("Спасибо за бой");
         }
     }
 }
