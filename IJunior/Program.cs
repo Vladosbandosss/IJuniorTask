@@ -31,15 +31,17 @@ namespace IJunior
             int enemySuperHeal;
             int heroSuperAttack;
             int enemySuperAttack;
-
-
             int useAttack;
             bool fight = true;
+            int combAttack;
+            int superAtack;
+
             while (fight)
             {
                 Console.WriteLine("Давай бей!Выбирай 1,2,или 3!");
                 int myChoise = Convert.ToInt32(Console.ReadLine());
                 int WhatNext = random.Next(0, 2);
+                
                 if (WhatNext == 0)
                 {
                     Console.WriteLine("Ты выбрал " + myChoise + " атакуем");
@@ -51,35 +53,86 @@ namespace IJunior
                     useAttack = random.Next(1, 4);
                 }
 
-                switch (useAttack)
+                combAttack = random.Next(0, 1);
+                 switch (useAttack)
                 {
                     case 1:
-                        heroHelth -= enemyCatAttack - heroArmor - heroHelpHelth;
-                        enemyHealth -= heroSqueezeAttack;
-                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
-                        Console.WriteLine("Настало время супер способностей!Герой и враг супер лечаться");
-                        heroSuperHeal = random.Next(5, 50);
-                        enemySuperHeal = random.Next(5, 50);
-                        heroHelth += heroSuperHeal;
-                        enemyHealth += enemySuperHeal;
-                        Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
-
+                       
+                        if (combAttack == 0)
+                        {
+                            heroHelth -= enemyCatAttack - heroArmor - heroHelpHelth;
+                            enemyHealth -= heroSqueezeAttack;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                            Console.WriteLine("Настало время супер способностей!Герой и враг супер лечаться");
+                            heroSuperHeal = random.Next(5, 50);
+                            enemySuperHeal = random.Next(5, 50);
+                            heroHelth += heroSuperHeal;
+                            enemyHealth += enemySuperHeal;
+                            Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+                        }
+                        else
+                        {
+                            superAtack = enemyCatAttack * 2;
+                            heroHelth -= superAtack - heroArmor - heroHelpHelth;
+                            enemyHealth -= heroSqueezeAttack;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                            Console.WriteLine("Настало время супер способностей!Герой и враг супер лечаться");
+                            heroSuperHeal = random.Next(5, 50);
+                            enemySuperHeal = random.Next(5, 50);
+                            heroHelth += heroSuperHeal;
+                            enemyHealth += enemySuperHeal;
+                            Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+                        }
+                        
                         break;
                     case 2:
-                        heroHelth -= enemySandAttack - heroArmor;
-                        enemyHealth -= heroStormAttack;
-                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
-                        Console.WriteLine("Настало время супер способностей!Герой и враг супер атакуют");
-                        heroSuperAttack = random.Next(10, 30);
-                        enemySuperAttack = random.Next(5, 20);
-                        heroHelth -= enemySuperAttack;
-                        enemyHealth -= heroSuperAttack;
-                        Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+
+                        if (combAttack == 0)
+                        {
+                            superAtack = enemySandAttack + 15;
+                           heroHelth -= superAtack - heroArmor;
+                            enemyHealth -= heroStormAttack;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                            Console.WriteLine("Настало время супер способностей!Герой и враг супер атакуют");
+                            heroSuperAttack = random.Next(10, 30);
+                            enemySuperAttack = random.Next(5, 20);
+                            heroHelth -= enemySuperAttack;
+                            enemyHealth -= heroSuperAttack;
+                            Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+                        }
+                        else
+                        {
+                            heroHelth -= enemySandAttack - heroArmor;
+                            enemyHealth -= heroStormAttack;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+                            Console.WriteLine("Настало время супер способностей!Герой и враг супер атакуют");
+                            heroSuperAttack = random.Next(10, 30);
+                            enemySuperAttack = random.Next(5, 20);
+                            heroHelth -= enemySuperAttack;
+                            enemyHealth -= heroSuperAttack;
+                            Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+
+                        }
+                       
                         break;
                     case 3:
-                        heroHelth -= enemyHighAttack - heroArmor;
-                        enemyHealth -= heroBigAttack - enemyHelpHealth;
-                        Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+
+                        if (combAttack == 0)
+                        {
+                            superAtack = enemyHighAttack + random.Next(1, 7);
+                            heroHelth -= superAtack - heroArmor;
+                            enemyHealth -= heroBigAttack - enemyHelpHealth;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+
+                        }
+                        else
+                        {
+                            heroHelth -= enemyHighAttack - heroArmor;
+                            enemyHealth -= heroBigAttack - enemyHelpHealth;
+                            Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
+
+                        }
+                        
                         break;
                     default:
                         Console.WriteLine("Ошибка выбора");
@@ -92,12 +145,14 @@ namespace IJunior
                     fight = false;
                     break;
                 }
+
                 if (heroHelth <= 0 && enemyHealth > 0)
                 {
                     Console.WriteLine("Бобедил враг");
                     fight = false;
                     break;
                 }
+
                 if (heroHelth >= 0 && enemyHealth <= 0)
                 {
                     Console.WriteLine("Бобедил герой");
