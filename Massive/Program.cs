@@ -8,8 +8,8 @@ namespace Massive
         {
             Random random = new Random();
             int[,] myArray = new int[3,5];
-            int sumSecondStrok = 0;
-            int proizvedFirstStolb = 1;
+            int sumSecondLine = 0;
+            int multiplyFirstColumn = 1;
 
             for (int i = 0; i < myArray.GetLength(0); i++)
             {
@@ -18,15 +18,15 @@ namespace Massive
                     myArray[i, j] = random.Next(0, 10);
                     if (i == 1)
                     {
-                        sumSecondStrok += myArray[i, j];
+                        sumSecondLine += myArray[i, j];
                     }
                     if(j == 0)
                     {
-                        proizvedFirstStolb *= myArray[i, j];
+                        multiplyFirstColumn *= myArray[i, j];
                     }
                 }
              }
-             Console.WriteLine($"Сумма второй строки {sumSecondStrok} произведение первого столбца {proizvedFirstStolb}");
+             Console.WriteLine($"Сумма второй строки {sumSecondLine} произведение первого столбца {multiplyFirstColumn}");
          }
     }
 }
