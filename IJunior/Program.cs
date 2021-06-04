@@ -30,8 +30,7 @@ namespace IJunior
             int strengthenAttack = 2;
             int littleStrenghten = 15;
 
-
-            while (isFight)
+             while (isFight)
             {
                 Console.WriteLine("Давай бей!Выбирай 1,2,или 3!");
                 int myChoiseAttack = Convert.ToInt32(Console.ReadLine());
