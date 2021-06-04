@@ -8,29 +8,29 @@ namespace Massive
         {
             Random random = new Random();
             int count = 30;
-            int[] Array = new int[count];
+            int[] array = new int[count];
             for (int i = 0; i < count; i++)
             {
-                Array[i] = random.Next(1, 30);
+                array[i] = random.Next(1, 30);
             }
-            foreach (var item in Array)
+            foreach (var item in array)
             {
                 Console.Write(item + " ");
             }
             Console.WriteLine();
             for (int i = 0; i < count; i++)
             {
-                if (i <= count-2 && i>0 && Array[i] > Array[i-1] && Array[i] > Array[i + 1])
+                if (i <= count-2 && i>0 && array[i] > array[i-1] && array[i] > array[i + 1])
                 {
-                    Console.WriteLine(Array[i]);
+                    Console.WriteLine(array[i]);
                 }
-                 if(i==0&&Array[i]>Array[i+1])
+                 if(i==0&&array[i]>array[i+1])
                 {
-                    Console.WriteLine(Array[i]);
+                    Console.WriteLine(array[i]);
                 }
-                 if (i == count-1&&Array[i]>Array[i-1])
+                 if (i == count-1&&array[i]>array[i-1])
                 {
-                    Console.WriteLine(Array[i]);
+                    Console.WriteLine(array[i]);
                 }
 
             }
