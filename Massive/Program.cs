@@ -7,30 +7,34 @@ namespace Massive
         static void Main(string[] args)
         {
             Random random = new Random();
-            int[,] myArray = new int[10,10];
-            int maxArrayNumber = myArray[0, 0];
-            for (int i = 0; i < myArray.GetLength(0); i++)
+            int count = 30;
+            int[] myArray = new int[count];
+            for (int i = 0; i < count; i++)
             {
-                for (int j = 0; j < myArray.GetLength(1); j++)
-                {
-                    myArray[i, j] = random.Next(0, 10);
-                    if (myArray[i, j] > maxArrayNumber)
-                    {
-                        maxArrayNumber = myArray[i, j];
-                    }
-                }
-             }
-            
-            for (int i = 0; i < myArray.GetLength(0); i++)
-            {
-                for (int j = 0; j < myArray.GetLength(1); j++)
-                {
-                   if (myArray[i, j] == maxArrayNumber)
-                    {
-                        myArray[i, j] = 0;
-                    }
-                }
+                myArray[i] = random.Next(1, 30);
             }
+            foreach (var item in myArray)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < count; i++)
+            {
+                if (i <= count-2 && i>0 && myArray[i] > myArray[i-1] && myArray[i] > myArray[i + 1])
+                {
+                    Console.WriteLine(myArray[i]);
+                }
+                 if(i==0&&myArray[i]>myArray[i+1])
+                {
+                    Console.WriteLine(myArray[i]);
+                }
+                 if (i == count-1&&myArray[i]>myArray[i-1])
+                {
+                    Console.WriteLine(myArray[i]);
+                }
+
+            }
+
         }
     }
 }
