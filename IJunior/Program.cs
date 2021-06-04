@@ -16,49 +16,37 @@ namespace IJunior
             int enemyCatAttack = 30;
             int enemySandAttack = 30;
             int enemyHighAttack = 35;
-            StartBattle(random, ref heroHelth, heroArmor, heroSqueezeAttack, heroStormAttack, heroBigAttack, ref enemyHealth, enemyCatAttack, enemySandAttack, enemyHighAttack);
-
-            Console.WriteLine("Спасибо за бой");
-        }
-
-       
-        
-        private static void StartBattle(Random random, ref int heroHelth, int heroArmor, int heroSqueezeAttack, int heroStormAttack, int heroBigAttack, ref int enemyHealth, int enemyCatAttack, int enemySandAttack, int enemyHighAttack)
-        {
             int heroHelpHelth = 30;
             int enemyHelpHealth = 30;
             int heroSuperHeal;
             int enemySuperHeal;
             int heroSuperAttack;
             int enemySuperAttack;
-            int useAttack;
+            int whitchAttackUse;
             bool fight = true;
-            int combAttack;
+            int lucckyPersonAttack;
             int superAtack;
-
+            
             while (fight)
             {
                 Console.WriteLine("Давай бей!Выбирай 1,2,или 3!");
                 int myChoise = Convert.ToInt32(Console.ReadLine());
-                int WhatNext = random.Next(0, 2);
-                
-                if (WhatNext == 0)
+                int whatNextStep = random.Next(0, 2);
+                if (whatNextStep == 0)
                 {
                     Console.WriteLine("Ты выбрал " + myChoise + " атакуем");
-                    useAttack = myChoise;
+                    whitchAttackUse = myChoise;
                 }
                 else
                 {
                     Console.WriteLine("Ай,не буду тебя слушать,пусть будет наугад");
-                    useAttack = random.Next(1, 4);
+                    whitchAttackUse = random.Next(1, 4);
                 }
-
-                combAttack = random.Next(0, 1);
-                 switch (useAttack)
+                lucckyPersonAttack = random.Next(0, 2);
+                switch (whitchAttackUse)
                 {
                     case 1:
-                       
-                        if (combAttack == 0)
+                         if (lucckyPersonAttack == 0)
                         {
                             heroHelth -= enemyCatAttack - heroArmor - heroHelpHelth;
                             enemyHealth -= heroSqueezeAttack;
@@ -66,6 +54,12 @@ namespace IJunior
                             Console.WriteLine("Настало время супер способностей!Герой и враг супер лечаться");
                             heroSuperHeal = random.Next(5, 50);
                             enemySuperHeal = random.Next(5, 50);
+                            if (heroSuperHeal > 25 && enemySuperHeal > 25)
+                            {
+                                Console.WriteLine("Использую секретик");
+                                heroSuperHeal = 0;
+                                enemySuperHeal = 0;
+                            }
                             heroHelth += heroSuperHeal;
                             enemyHealth += enemySuperHeal;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
@@ -79,23 +73,32 @@ namespace IJunior
                             Console.WriteLine("Настало время супер способностей!Герой и враг супер лечаться");
                             heroSuperHeal = random.Next(5, 50);
                             enemySuperHeal = random.Next(5, 50);
+                            if (heroSuperHeal < 25 && enemySuperHeal < 25)
+                            {
+                                Console.WriteLine("Использую секретик");
+                                heroSuperHeal = 20;
+                                enemySuperHeal = 20;
+                            }
                             heroHelth += heroSuperHeal;
                             enemyHealth += enemySuperHeal;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
                         }
-                        
                         break;
                     case 2:
-
-                        if (combAttack == 0)
+                        if (lucckyPersonAttack == 0)
                         {
                             superAtack = enemySandAttack + 15;
-                           heroHelth -= superAtack - heroArmor;
+                            heroHelth -= superAtack - heroArmor;
                             enemyHealth -= heroStormAttack;
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
                             Console.WriteLine("Настало время супер способностей!Герой и враг супер атакуют");
                             heroSuperAttack = random.Next(10, 30);
                             enemySuperAttack = random.Next(5, 20);
+                            if (enemySuperAttack > 25)
+                            {
+                                Console.WriteLine("Использую секретик");
+                                enemySuperAttack = 35;
+                            }
                             heroHelth -= enemySuperAttack;
                             enemyHealth -= heroSuperAttack;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
@@ -108,59 +111,59 @@ namespace IJunior
                             Console.WriteLine("Настало время супер способностей!Герой и враг супер атакуют");
                             heroSuperAttack = random.Next(10, 30);
                             enemySuperAttack = random.Next(5, 20);
+                            if (heroSuperAttack > 25)
+                            {
+                                Console.WriteLine("Использую секретик");
+                                heroSuperAttack = 30;
+                            }
                             heroHelth -= enemySuperAttack;
                             enemyHealth -= heroSuperAttack;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
-
-                        }
-                       
-                        break;
+                         }
+                         break;
                     case 3:
-
-                        if (combAttack == 0)
+                        if (lucckyPersonAttack == 0)
                         {
                             superAtack = enemyHighAttack + random.Next(1, 7);
                             heroHelth -= superAtack - heroArmor;
                             enemyHealth -= heroBigAttack - enemyHelpHealth;
+                            if (heroHelth < 30 && enemyHealth < 30)
+                            {
+                                Console.WriteLine("Использую секретик");
+                                heroHelth += random.Next(1, 10);
+                                enemyHealth += random.Next(5, 7);
+                            }
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
-
                         }
                         else
                         {
                             heroHelth -= enemyHighAttack - heroArmor;
                             enemyHealth -= heroBigAttack - enemyHelpHealth;
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
-
                         }
-                        
                         break;
-                    default:
+                        default:
                         Console.WriteLine("Ошибка выбора");
                         break;
                 }
-
-                if (heroHelth <= 0 && enemyHealth <= 0)
+                    if (heroHelth <= 0 && enemyHealth <= 0)
                 {
                     Console.WriteLine("Бой окончен ничья");
                     fight = false;
-                    break;
-                }
-
-                if (heroHelth <= 0 && enemyHealth > 0)
+                  }
+                    else if (heroHelth <= 0 && enemyHealth > 0)
                 {
                     Console.WriteLine("Бобедил враг");
                     fight = false;
-                    break;
-                }
-
-                if (heroHelth >= 0 && enemyHealth <= 0)
+                 }
+                    else if (heroHelth >= 0 && enemyHealth <= 0)
                 {
                     Console.WriteLine("Бобедил герой");
                     fight = false;
-                    break;
-                }
+                 }
             }
+             Console.WriteLine("Спасибо за бой");
         }
-    }
+     }
 }
 
