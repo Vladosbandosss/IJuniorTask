@@ -27,7 +27,10 @@ namespace IJunior
             int lucckyPersonAttack;
             int superAtack;
             int zaklinanie;
-            
+            int strengthenAttack = 2;
+            int littleStrenghten = 15;
+
+
             while (isFight)
             {
                 Console.WriteLine("Давай бей!Выбирай 1,2,или 3!");
@@ -75,7 +78,7 @@ namespace IJunior
                         }
                         else
                         {
-                            superAtack = enemyCatAttack * 2;
+                            superAtack = enemyCatAttack * strengthenAttack;
                             heroHelth -= superAtack - heroArmor - heroHelpHelth;
                             enemyHealth -= heroSqueezeAttack;
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
@@ -101,7 +104,7 @@ namespace IJunior
                     case 2:
                         if (lucckyPersonAttack == 0)
                         {
-                            superAtack = enemySandAttack + 15;
+                            superAtack = enemySandAttack + littleStrenghten;
                             heroHelth -= superAtack - heroArmor;
                             enemyHealth -= heroStormAttack;
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
