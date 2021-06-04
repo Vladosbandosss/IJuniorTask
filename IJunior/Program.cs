@@ -23,19 +23,20 @@ namespace IJunior
             int heroSuperAttack;
             int enemySuperAttack;
             int whitchAttackUse;
-            bool fight = true;
+            bool isFight = true;
             int lucckyPersonAttack;
             int superAtack;
+            int zaklinanie;
             
-            while (fight)
+            while (isFight)
             {
                 Console.WriteLine("Давай бей!Выбирай 1,2,или 3!");
-                int myChoise = Convert.ToInt32(Console.ReadLine());
+                int myChoiseAttack = Convert.ToInt32(Console.ReadLine());
                 int whatNextStep = random.Next(0, 2);
                 if (whatNextStep == 0)
                 {
-                    Console.WriteLine("Ты выбрал " + myChoise + " атакуем");
-                    whitchAttackUse = myChoise;
+                    Console.WriteLine("Ты выбрал " + myChoiseAttack + " атакуем");
+                    whitchAttackUse = myChoiseAttack;
                 }
                 else
                 {
@@ -43,6 +44,8 @@ namespace IJunior
                     whitchAttackUse = random.Next(1, 4);
                 }
                 lucckyPersonAttack = random.Next(0, 2);
+                zaklinanie = random.Next(0, 2);
+                
                 switch (whitchAttackUse)
                 {
                     case 1:
@@ -63,6 +66,12 @@ namespace IJunior
                             heroHelth += heroSuperHeal;
                             enemyHealth += enemySuperHeal;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+                            if (heroHelth > 70)
+                            {
+                                Console.WriteLine("Произошло заклинание,враг усиливает атаку");
+                                enemyCatAttack += random.Next(0, 10);
+                               
+                            }
                         }
                         else
                         {
@@ -81,6 +90,11 @@ namespace IJunior
                             }
                             heroHelth += heroSuperHeal;
                             enemyHealth += enemySuperHeal;
+                            if (heroSuperHeal > 30)
+                            {
+                                Console.WriteLine("Герой сильно подлечился,но атака сейчас ослабнет(((");
+                                heroSqueezeAttack -= random.Next(1, 7);
+                            }
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
                         }
                         break;
@@ -102,6 +116,11 @@ namespace IJunior
                             heroHelth -= enemySuperAttack;
                             enemyHealth -= heroSuperAttack;
                             Console.WriteLine($"Теперь у героя {heroHelth} жизней, у врага {enemyHealth}");
+                            if (heroSuperAttack==30)
+                            {
+                                Console.WriteLine("Пока мы лечились враг усилил атаку(((");
+                                enemySandAttack += random.Next(10, 15);
+                            }
                         }
                         else
                         {
@@ -141,6 +160,11 @@ namespace IJunior
                             enemyHealth -= heroBigAttack - enemyHelpHealth;
                             Console.WriteLine($"У героя {heroHelth} жизней, у врага {enemyHealth}");
                         }
+                        if (heroHelth>60&&enemyHealth<20)
+                        {
+                            Console.WriteLine("Враг использует ульту");
+                            enemyHighAttack += random.Next(10, 25);
+                        }
                         break;
                         default:
                         Console.WriteLine("Ошибка выбора");
@@ -149,17 +173,17 @@ namespace IJunior
                     if (heroHelth <= 0 && enemyHealth <= 0)
                 {
                     Console.WriteLine("Бой окончен ничья");
-                    fight = false;
+                    isFight = false;
                   }
                     else if (heroHelth <= 0 && enemyHealth > 0)
                 {
                     Console.WriteLine("Бобедил враг");
-                    fight = false;
+                    isFight = false;
                  }
                     else if (heroHelth >= 0 && enemyHealth <= 0)
                 {
                     Console.WriteLine("Бобедил герой");
-                    fight = false;
+                    isFight = false;
                  }
             }
              Console.WriteLine("Спасибо за бой");
