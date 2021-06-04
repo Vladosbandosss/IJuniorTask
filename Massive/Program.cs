@@ -1,40 +1,46 @@
 ﻿using System;
+using System.Linq;
 
 namespace Massive
 {
     class Program
     {
+        static void ChangArray(ref  int[] array,int newSize,int valueAdd)
+        {
+            int []newArray = new int[newSize];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == array.Length - 1)
+                {
+                    newArray[i+1] = valueAdd;
+                }
+                 newArray[i] = array[i];
+            }
+            array = newArray;
+        }
         static void Main(string[] args)
         {
-            Random random = new Random();
-            int count = 30;
-            int[] array = new int[count];
-            for (int i = 0; i < count; i++)
+            bool isWorking = true;
+            int sum = 0;
+            int[] array = { 0 };
+            
+            while (isWorking)
             {
-                array[i] = random.Next(1, 30);
-            }
-            foreach (var item in array)
-            {
-                Console.Write(item + " ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < count; i++)
-            {
-                if (i <= count-2 && i>0 && array[i] > array[i-1] && array[i] > array[i + 1])
+                Console.WriteLine("Вводи число буду добавлять");
+                string commad = Console.ReadLine();
+                if (commad == "sum")
                 {
-                    Console.WriteLine(array[i]);
+                    sum = array.Sum();
+                    isWorking = false;
                 }
-                 if(i==0&&array[i]>array[i+1])
+                else
                 {
-                    Console.WriteLine(array[i]);
+                    int addToArray = Convert.ToInt32(commad);
+                    ChangArray(ref array, array.Length + 1, addToArray);
                 }
-                 if (i == count-1&&array[i]>array[i-1])
-                {
-                    Console.WriteLine(array[i]);
-                }
-
             }
-
+              Console.WriteLine($"Сумма всех элементов в массиве {sum}");
         }
     }
 }
