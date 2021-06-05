@@ -7,7 +7,6 @@ namespace Functions
         static void Main(string[] args)
         {
             bool isWorking = true;
-            int countInfo = 1;
             string[] fioArray = { "" };
             string[] positionArray = { "" };
             
@@ -18,14 +17,13 @@ namespace Functions
                 switch (ourChoise)
                 {
                     case 1:
-                        countInfo++;
-                        Console.WriteLine("Вы выбрали добавить досье!");
+                         Console.WriteLine("Вы выбрали добавить досье!");
                         Console.WriteLine("Введите фио");
                         string fio = Console.ReadLine();
-                        AddInfo(ref fioArray, countInfo, fio);
+                        AddInfo(ref fioArray, fioArray.Length+1, fio);
                         Console.WriteLine("Введите должность");
                         string position = Console.ReadLine();
-                        AddInfo( ref positionArray, countInfo, position);
+                        AddInfo( ref positionArray, positionArray.Length+1, position);
                         Console.WriteLine("Готово,данные добавлены");
                         break;
                     case 2:
@@ -41,10 +39,9 @@ namespace Functions
                         }
                         break;
                     case 3:
-                        countInfo--;
-                        Console.WriteLine("Удаляю последнее досье");
-                        DeleteInfo(ref fioArray, countInfo);
-                        DeleteInfo(ref positionArray, countInfo);
+                       Console.WriteLine("Удаляю последнее досье");
+                        DeleteInfo(ref fioArray, fioArray.Length-1);
+                        DeleteInfo(ref positionArray, positionArray.Length-1);
                         break;
                     case 4:
                         Console.WriteLine("Будем искать по фамилии,введите фамилию");
@@ -72,6 +69,7 @@ namespace Functions
              }
             Console.WriteLine("Программа завершена,всего доброго");
         }
+
         public static void AddInfo(ref string []arr,int newSize,string fio)
         {
             string[] newArray = new string[newSize];
@@ -85,6 +83,7 @@ namespace Functions
             }
             arr = newArray;
         }
+
         public static void DeleteInfo(ref string[] arr, int newSize)
         {
             string[] newArray = new string[newSize];
