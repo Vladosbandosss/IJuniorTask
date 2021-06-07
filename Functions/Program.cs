@@ -4,32 +4,32 @@ namespace Functions
 {
     class Program
     {
-        static int calculateNumber = 10;
+       
         static void Main(string[] args)
         {
-            Console.WriteLine("Введи число в % от 1 до 100");
-            try
-            {
-                DrawSymbol();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Что-то пошло не так");
-            }
+            TryConvert();
         }
 
-        private static void DrawSymbol()
+        private static void TryConvert()
         {
-            int userInput = Convert.ToInt32(Console.ReadLine());
-            int programDrawing = userInput / calculateNumber;
-            Console.WriteLine(programDrawing);
-            char syblolForDrawing = '#';
-            Console.Write("[");
-            for (int i = 0; i < programDrawing; i++)
+            bool isEnterNumber = true;
+            while (isEnterNumber)
             {
-                Console.Write(syblolForDrawing);
+                int convertedNumber;
+                Console.WriteLine("Введите число");
+                string inputNumber = Console.ReadLine();
+
+                if (int.TryParse(inputNumber, out convertedNumber))
+                {
+                    Console.WriteLine("Удачная конвертация");
+                    isEnterNumber = false;
+                }
+                else
+                {
+                    Console.WriteLine("Что-то не так,повторите");
+                }
             }
-            Console.Write("]");
+            Console.WriteLine("Закончил работу");
         }
     }
 }
