@@ -16,7 +16,7 @@ namespace Functions
         {
             Random random = new Random();
             var arrToShufle = new List<int> { 1, 2, 3, 4, 5 };
-            var shufle = arrToShufle.OrderBy(n => random.Next()).ToList();
+            var shufle = arrToShufle.OrderBy(x => random.Next()).ToList();
             foreach (var item in shufle)
             {
                 Console.WriteLine(item);
