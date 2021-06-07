@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Functions
 {
@@ -7,29 +9,18 @@ namespace Functions
        
         static void Main(string[] args)
         {
-            TryConvert();
+            Shufle();
         }
 
-        private static void TryConvert()
+        private static void Shufle()
         {
-            bool isEnterNumber = true;
-            while (isEnterNumber)
+            Random random = new Random();
+            var arrToShufle = new List<int> { 1, 2, 3, 4, 5 };
+            var shufle = arrToShufle.OrderBy(n => random.Next()).ToList();
+            foreach (var item in shufle)
             {
-                int convertedNumber;
-                Console.WriteLine("Введите число");
-                string inputNumber = Console.ReadLine();
-
-                if (int.TryParse(inputNumber, out convertedNumber))
-                {
-                    Console.WriteLine("Удачная конвертация,мы сконвертировали число " + convertedNumber);
-                    isEnterNumber = false;
-                }
-                else
-                {
-                    Console.WriteLine("Что-то не так,повторите");
-                }
+                Console.WriteLine(item);
             }
-            Console.WriteLine("Закончил работу");
         }
     }
 }
