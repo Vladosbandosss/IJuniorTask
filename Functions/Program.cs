@@ -4,6 +4,7 @@ namespace Functions
 {
     class Program
     {
+        static int calculateNumber = 10;
         static void Main(string[] args)
         {
             Console.WriteLine("Введи число в % от 1 до 100");
@@ -20,13 +21,13 @@ namespace Functions
         private static void DrawSymbol()
         {
             int userInput = Convert.ToInt32(Console.ReadLine());
-            int programDrawing = userInput / 10;
+            int programDrawing = userInput / calculateNumber;
             Console.WriteLine(programDrawing);
-            char SyblolForDrawing = '#';
+            char syblolForDrawing = '#';
             Console.Write("[");
             for (int i = 0; i < programDrawing; i++)
             {
-                Console.Write(SyblolForDrawing);
+                Console.Write(syblolForDrawing);
             }
             Console.Write("]");
         }
