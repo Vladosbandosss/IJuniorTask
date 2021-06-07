@@ -14,8 +14,8 @@ namespace Test
             {
                 int choose;
                 Console.WriteLine("Выбери что нужно сделать!1-добавим досье,2 выведем все досье,3 удалю досье,4 поиск по фамилии,5 выход");
-                string ourChoise = Console.ReadLine();
-                bool resultIsWorking = int.TryParse(ourChoise,out choose);
+                string userInput = Console.ReadLine();
+                bool resultIsWorking = int.TryParse(userInput,out choose);
                 if (resultIsWorking)
                 {
                     switch (choose)
