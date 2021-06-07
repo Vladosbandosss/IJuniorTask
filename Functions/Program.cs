@@ -21,7 +21,7 @@ namespace Functions
 
                 if (int.TryParse(inputNumber, out convertedNumber))
                 {
-                    Console.WriteLine("Удачная конвертация");
+                    Console.WriteLine("Удачная конвертация,мы сконвертировали число " + convertedNumber);
                     isEnterNumber = false;
                 }
                 else
