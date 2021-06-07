@@ -12,11 +12,13 @@ namespace Test
             var positionInfo = new List<String>();
             while (isWorking)
             {
+                int choose;
                 Console.WriteLine("Выбери что нужно сделать!1-добавим досье,2 выведем все досье,3 удалю досье,4 поиск по фамилии,5 выход");
-                try
+                string ourChoise = Console.ReadLine();
+                bool resultIsWorking = int.TryParse(ourChoise,out choose);
+                if (resultIsWorking)
                 {
-                    int ourChoise = Convert.ToInt32(Console.ReadLine());
-                    switch (ourChoise)
+                    switch (choose)
                     {
                         case 1:
                             AddDossier(fioInfo, positionInfo);
@@ -39,11 +41,12 @@ namespace Test
                             break;
                     }
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine(" Это не число");
+                    Console.WriteLine("Что-то не так,повторите");
                 }
-            }
+                
+             }
         }
 
         private static void FindSurnameDossier(List<string> fioInfo, List<string> positionInfo)
@@ -63,10 +66,7 @@ namespace Test
         private static void DeleteDosier(List<string> fioInfo, List<string> positionInfo)
         {
             Console.WriteLine("Удаляю досье");
-            for (int i = 0; i < fioInfo.Count; i++)
-            {
-                Console.WriteLine("номер " + (i + 1) + " должность " + fioInfo[i] + " должность " + positionInfo[i]);
-            }
+            ShowInfo(fioInfo, positionInfo);
             Console.WriteLine("Выберите номер досье который хотите удалить");
             int WhatInfoDelate = Convert.ToInt32(Console.ReadLine());
             fioInfo.RemoveAt(WhatInfoDelate - 1);
@@ -76,6 +76,11 @@ namespace Test
         private static void ShowAllDosier(List<string> fioInfo, List<string> positionInfo)
         {
             Console.WriteLine("Вы выбрали вывести досье,вывожу");
+            ShowInfo(fioInfo, positionInfo);
+        }
+
+        private static void ShowInfo(List<string> fioInfo, List<string> positionInfo)
+        {
             for (int i = 0; i < fioInfo.Count; i++)
             {
                 Console.WriteLine("номер " + (i + 1) + " должность " + fioInfo[i] + " должность " + positionInfo[i]);
