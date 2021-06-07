@@ -7,8 +7,10 @@ namespace Functions
         static void Main(string[] args)
         {
             bool isWorking = true;
-            string[] fioArray = { "" };
-            string[] positionArray = { "" };
+           
+            string[] fioInfos = new string[0];
+            string[] positionInfos = new string[0];
+          
 
             while (isWorking)
             {
@@ -16,7 +18,7 @@ namespace Functions
                 try
                 {
                     int ourChoise = Convert.ToInt32(Console.ReadLine());
-                    MakeTask(ref isWorking, ref fioArray, ref positionArray, ourChoise);
+                    MakeTask(ref isWorking, ref fioInfos, ref positionInfos, ourChoise);
                 }
                 catch (FormatException)
                 {
@@ -31,7 +33,7 @@ namespace Functions
             switch (ourChoise)
             {
                 case 1:
-                    Console.WriteLine("Вы выбрали добавить досье!");
+                   Console.WriteLine("Вы выбрали добавить досье!");
                     Console.WriteLine("Введите фио");
                     string fio = Console.ReadLine();
                     AddInfo(ref fioArray, fioArray.Length + 1, fio);
@@ -45,12 +47,7 @@ namespace Functions
                     int lenghtAllArray = fioArray.Length;
                     for (int i = 0; i < lenghtAllArray; i++)
                     {
-                        if (i == 0)
-                        {
-                            continue;//пропустил первое тк заполнил его пустым значением и позицией ноль!
-                            //таким образов так намного удобнее 
-                        }
-                        Console.WriteLine("Позиция " + i + " " + fioArray[i] + " - " + positionArray[i]);
+                       Console.WriteLine("Позиция " + i + " " + fioArray[i] + " - " + positionArray[i]);
                     }
                     break;
                 case 3:
