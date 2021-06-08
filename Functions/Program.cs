@@ -19,38 +19,42 @@ namespace Functions
 
             while (isPlaing)
             {
-               
-                if (Console.KeyAvailable)
+                MovePalyer(ref packmanX, ref packmanY, ref pacmanDX, ref pacmanDY, map);
+            }
+        }
+
+        private static void MovePalyer(ref int packmanX, ref int packmanY, ref int pacmanDX, ref int pacmanDY, char[,] map)
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo key = Console.ReadKey(true);
+
+                switch (key.Key)
                 {
-                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    case ConsoleKey.UpArrow:
+                        pacmanDX = -1; pacmanDY = 0;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        pacmanDX = 1; pacmanDY = 0;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        pacmanDX = 0; pacmanDY = -1;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        pacmanDX = 0; pacmanDY = 1;
+                        break;
 
-                    switch (key.Key)
-                    {
-                        case ConsoleKey.UpArrow:
-                            pacmanDX = -1;pacmanDY = 0;
-                            break;
-                        case ConsoleKey.DownArrow:
-                            pacmanDX = 1; pacmanDY = 0;
-                            break;
-                        case ConsoleKey.LeftArrow:
-                            pacmanDX = 0; pacmanDY = -1;
-                            break;
-                        case ConsoleKey.RightArrow:
-                            pacmanDX = 0; pacmanDY = 1;
-                            break;
-                      
-                    }
-                    if (map[packmanX + pacmanDX, packmanY + pacmanDY] != '#')
-                    {
-                        Console.SetCursorPosition(packmanY, packmanX);
-                        Console.Write(" ");
+                }
+                if (map[packmanX + pacmanDX, packmanY + pacmanDY] != '#')
+                {
+                    Console.SetCursorPosition(packmanY, packmanX);
+                    Console.Write(" ");
 
-                        packmanX += pacmanDX;
-                        packmanY += pacmanDY;
+                    packmanX += pacmanDX;
+                    packmanY += pacmanDY;
 
-                        Console.SetCursorPosition(packmanY, packmanX);
-                        Console.Write('@');
-                    }
+                    Console.SetCursorPosition(packmanY, packmanX);
+                    Console.Write('@');
                 }
             }
         }
