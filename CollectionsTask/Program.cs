@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CollectionsTask
 {
@@ -7,33 +8,40 @@ namespace CollectionsTask
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
-            int sum = 0;
-            int count = 0;
             bool isWorking = true;
-            Queue<int> monewClients = new Queue<int>();
-            for (int i = 0; i < 5; i++)
-            {
-                monewClients.Enqueue(random.Next(1, 9));
-            }
+            List<int> userArray = new List<int>();
 
-            while (isWorking&&monewClients.Count>0)
+            while (isWorking)
             {
-                WorkProcess(ref sum, ref count, monewClients);
-
+                isWorking = WorkMoment(isWorking, userArray);
             }
-            Console.WriteLine("Прогррамма завершена"); 
-            Console.WriteLine("Обслужили " + count + " клиентов и заработали " + sum + " денег");
         }
 
-        private static void WorkProcess(ref int sum, ref int count, Queue<int> monewClients)
+        private static bool WorkMoment(bool isWorking, List<int> userArray)
         {
-            Console.WriteLine("Добро пожаловать в магазин,у нас " + sum + " денег");
-            Console.WriteLine("Нажмите любую клавишу");
-            Console.ReadKey();
-            Console.Clear();
-            sum += monewClients.Dequeue();
-            count++;
+            Console.WriteLine("Вводи числа,введи exit что б выйти с программы,введи sum и я все выведу");
+            string result = Console.ReadLine();
+            int userNumber;
+            int sum;
+
+            if (result == "exit")
+            {
+                isWorking = false;
+            }
+            else if (result == "sum")
+            {
+                sum = userArray.Sum();
+                Console.WriteLine("Сумма всех элементов в массиве- " + sum);
+            }
+            else
+            {
+                if (int.TryParse(result, out userNumber))
+                {
+                    userArray.Add(userNumber);
+                }
+            }
+
+            return isWorking;
         }
     }
 }
