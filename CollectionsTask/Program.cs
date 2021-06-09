@@ -7,32 +7,33 @@ namespace CollectionsTask
     {
         static void Main(string[] args)
         {
+            Random random = new Random();
+            int sum = 0;
+            int count = 0;
             bool isWorking = true;
-            Dictionary<string, int> vocabulary = new Dictionary<string, int>();
-            vocabulary.Add("a",1);
-            vocabulary.Add("b",2);
-            vocabulary.Add("c",3);
-            vocabulary.Add("d",4);
-            vocabulary.Add("e",5);
-            vocabulary.Add("f",6);
-            vocabulary.Add("g",7);
-            vocabulary.Add("h",8);
-            vocabulary.Add("i",9);
-
-            while (isWorking)
+            Queue<int> monewClients = new Queue<int>();
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("Введи слова,поищу значение");
-                string userWord = Console.ReadLine();
-
-                if (vocabulary.ContainsKey(userWord))
-                {
-                    Console.WriteLine("Все хорошо,вот значение " + vocabulary[userWord]);
-                }
-                else
-                {
-                    Console.WriteLine("нет такого значения");
-                }
+                monewClients.Enqueue(random.Next(1, 9));
             }
+
+            while (isWorking&&monewClients.Count>0)
+            {
+                WorkProcess(ref sum, ref count, monewClients);
+
+            }
+            Console.WriteLine("Прогррамма завершена"); 
+            Console.WriteLine("Обслужили " + count + " клиентов и заработали " + sum + " денег");
+        }
+
+        private static void WorkProcess(ref int sum, ref int count, Queue<int> monewClients)
+        {
+            Console.WriteLine("Добро пожаловать в магазин,у нас " + sum + " денег");
+            Console.WriteLine("Нажмите любую клавишу");
+            Console.ReadKey();
+            Console.Clear();
+            sum += monewClients.Dequeue();
+            count++;
         }
     }
 }
