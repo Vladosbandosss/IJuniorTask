@@ -71,8 +71,7 @@ namespace CollectionsTask
                 {
                     if (i == prepareForDelete)
                     {
-                        
-                        //workers.Remove(); без понятия как удалить(((((
+                        workers.Remove(workers.Keys.ToList()[i]);
                     }
 
                 }
