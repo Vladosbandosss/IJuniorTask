@@ -17,16 +17,13 @@ namespace OOP
         private int _x;
         private int _y;
 
-        public int X
+       public int GetX()
         {
-            get { return _x; }
-            set { _x = value; }
+            return _x;
         }
-
-       public int Y
+        public int GetY()
         {
-            get { return _y; }
-            set { _y = value; }
+            return _y;
         }
 
          public Player(int x,int y)
@@ -40,8 +37,8 @@ namespace OOP
     {
         public void DrawPlayer(Player player)
         {
-            int xPos = player.X;
-            int yPos = player.Y;
+            int xPos = player.GetX();
+            int yPos = player.GetY();
             Console.SetCursorPosition(xPos, yPos);
             Console.WriteLine("Отрисовал");
         }
