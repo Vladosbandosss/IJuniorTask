@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP
 {
@@ -6,42 +7,157 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            Player myPlayer = new Player(10, 5);
-            Drawer myDrawer = new Drawer();
-            myDrawer.DrawPlayer(myPlayer);
+            bool isWorking = true;
+            List<Player> players = new List<Player>();
+          
+            while (isWorking)
+            {
+                Console.WriteLine("Добро пожаловать нажмите 1 что б добавить игрока,2 забанить,3 разабнить,4 удалить,5 выход");
+                try
+                {
+                    int userInput = Convert.ToInt32(Console.ReadLine());
+
+                    switch (userInput)
+                    {
+                        case 1:
+                            CreatPlayer(players);
+                            break;
+                        case 2:
+                            ShowAllPlayers(players);
+                            BunPlayers(players);
+                            
+                            break;
+                        case 3:
+                            ShowAllPlayers(players);
+                            UnBunPlayers(players);
+
+                            break;
+                        case 4:
+                            ShowAllPlayers(players);
+                            DeletePlayers(players);
+
+                            break;
+                        case 5:
+                            isWorking = false;
+                            break;
+                        default:
+                            Console.WriteLine("Ошибка");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка ввода");
+                }
+            }
+            Console.WriteLine("Программа завершена");
+        }
+
+        private static void BunPlayers(List<Player> players)
+        {
+            Console.WriteLine("Введите номер который хотите забанить");
+            int numberToBan;
+            int.TryParse(Console.ReadLine(), out numberToBan);
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].GetPlayerNumber() == numberToBan)
+                {
+                    players[i].BanUser();
+                }
+            }
+        }
+
+        private static void UnBunPlayers(List<Player> players)
+        {
+            Console.WriteLine("Введите номер который хотите разбанить");
+            int numberToUnban;
+            int.TryParse(Console.ReadLine(), out numberToUnban);
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].GetPlayerNumber() == numberToUnban)
+                {
+                    players[i].UnBunUser();
+                }
+            }
+        }
+
+        private static void DeletePlayers(List<Player> players)
+        {
+            Console.WriteLine("Ведите номер который хотите удалить");
+            int numberToDelete;
+            int.TryParse(Console.ReadLine(), out numberToDelete);
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].GetPlayerNumber() == numberToDelete)
+                {
+                    players.Remove(players[i]);
+                }
+            }
+        }
+
+        private static void ShowAllPlayers(List<Player> players)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].ShowInfo();
+            }
+        }
+
+        private static void CreatPlayer(List<Player> players)
+        {
+            int playerLevel;
+            int playerNumber;
+            Console.WriteLine("Введите имя");
+            string playerName = Console.ReadLine();
+            Console.WriteLine("Введиите порядковый номер");
+            int.TryParse(Console.ReadLine(), out playerNumber);
+            Console.WriteLine("Введите уровень");
+            int.TryParse(Console.ReadLine(), out playerLevel);
+            Player player = new Player(playerNumber, playerName, playerLevel);
+            players.Add(player);
         }
     }
-
     class Player
     {
-        private int _x;
-        private int _y;
+        private int _playerNumber;
+        private string _playerName;
+        private int _playerLevel;
+        private bool _isBan;
 
-       public int GetX()
+        public Player(int number, string name, int level)
         {
-            return _x;
-        }
-        public int GetY()
-        {
-            return _y;
+            _playerNumber = number;
+            _playerName = name;
+            _playerLevel = level;
+            _isBan = false;
         }
 
-         public Player(int x,int y)
+         public void ShowInfo()
         {
-            _x = x;
-            _y = y;
+            Console.WriteLine($"номер {_playerNumber} имя {_playerName} уровень {_playerLevel} статус бана {_isBan}");
         }
-    }
-
-    class Drawer
-    {
-        public void DrawPlayer(Player player)
+        public void BanUser()
         {
-            int xPos = player.GetX();
-            int yPos = player.GetY();
-            Console.SetCursorPosition(xPos, yPos);
-            Console.WriteLine("Отрисовал");
+            if (_isBan == false)
+            {
+                _isBan = true;
+            }
+        }
+        public void UnBunUser()
+        {
+            if (_isBan == true)
+            {
+                _isBan = false;
+            }
+        }
+        public int GetPlayerNumber()
+        {
+            return _playerNumber;
         }
     }
 }
+
 
