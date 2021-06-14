@@ -66,7 +66,7 @@ namespace OOP
             }
         }
 
-        private static int CheckPlayerInput()
+        public static int CheckPlayerInput()
         {
             Console.WriteLine("Введите номер который хотите забанить");
             int numberToBan;
@@ -77,7 +77,11 @@ namespace OOP
         private static void UnBunPlayers(List<Player> players)
         {
             int numberToUnban = CheckPlayerInput();
+            UnBanPlayer(players, numberToUnban);
+        }
 
+        private static void UnBanPlayer(List<Player> players, int numberToUnban)
+        {
             for (int i = 0; i < players.Count; i++)
             {
                 if (players[i].GetPlayerNumber() == numberToUnban)
@@ -160,6 +164,12 @@ namespace OOP
             return _playerNumber;
         }
     }
+
+    class DataBase
+    {
+       //что запихивать не понимаю(
+    }
 }
+   
 
 
