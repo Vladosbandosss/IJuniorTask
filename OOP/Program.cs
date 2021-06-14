@@ -8,7 +8,8 @@ namespace OOP
         static void Main(string[] args)
         {
             bool isWorking = true;
-            List<Player> players = new List<Player>();
+            DataBase listPlayers = new DataBase();
+           
           
             while (isWorking)
             {
@@ -20,22 +21,19 @@ namespace OOP
                     switch (userInput)
                     {
                         case 1:
-                            CreatPlayer(players);
+                            listPlayers.CreatPlayer();
                             break;
                         case 2:
-                            ShowAllPlayers(players);
-                            BunPlayers(players);
-                            
-                            break;
+                            listPlayers.ShowAllPlayers();
+                            listPlayers.BunPlayers();
+                             break;
                         case 3:
-                            ShowAllPlayers(players);
-                            UnBunPlayers(players);
-
+                            listPlayers.ShowAllPlayers();
+                            listPlayers.UnBunPlayers();
                             break;
                         case 4:
-                            ShowAllPlayers(players);
-                            DeletePlayers(players);
-
+                            listPlayers.ShowAllPlayers();
+                            listPlayers.DeletePlayers();
                             break;
                         case 5:
                             isWorking = false;
@@ -52,80 +50,9 @@ namespace OOP
             }
             Console.WriteLine("Программа завершена");
         }
-
-        private static void BunPlayers(List<Player> players)
-        {
-            int numberToBan = CheckPlayerInput();
-
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].GetPlayerNumber() == numberToBan)
-                {
-                    players[i].BanUser();
-                }
-            }
-        }
-
-        public static int CheckPlayerInput()
-        {
-            Console.WriteLine("Введите номер который хотите забанить");
-            int numberToBan;
-            int.TryParse(Console.ReadLine(), out numberToBan);
-            return numberToBan;
-        }
-
-        private static void UnBunPlayers(List<Player> players)
-        {
-            int numberToUnban = CheckPlayerInput();
-            UnBanPlayer(players, numberToUnban);
-        }
-
-        private static void UnBanPlayer(List<Player> players, int numberToUnban)
-        {
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].GetPlayerNumber() == numberToUnban)
-                {
-                    players[i].UnBunUser();
-                }
-            }
-        }
-
-        private static void DeletePlayers(List<Player> players)
-        {
-            int numberToDelete = CheckPlayerInput();
-
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].GetPlayerNumber() == numberToDelete)
-                {
-                    players.Remove(players[i]);
-                }
-            }
-        }
-
-        private static void ShowAllPlayers(List<Player> players)
-        {
-            for (int i = 0; i < players.Count; i++)
-            {
-                players[i].ShowInfo();
-            }
-        }
-
-        private static void CreatPlayer(List<Player> players)
-        {
-            int playerLevel;
-            int playerNumber;
-            Console.WriteLine("Введите имя");
-            string playerName = Console.ReadLine();
-            Console.WriteLine("Введиите порядковый номер");
-            int.TryParse(Console.ReadLine(), out playerNumber);
-            Console.WriteLine("Введите уровень");
-            int.TryParse(Console.ReadLine(), out playerLevel);
-            Player player = new Player(playerNumber, playerName, playerLevel);
-            players.Add(player);
-        }
     }
+
+         
     class Player
     {
         private int _playerNumber;
@@ -167,9 +94,80 @@ namespace OOP
 
     class DataBase
     {
-       //что запихивать не понимаю(
+      public  List<Player> playersList = new List<Player>();
+
+        public  void BunPlayers()
+        {
+            Console.WriteLine("Введите номер который хотите забанить");
+            int numberToBan = OperationWithPlayer();
+          
+            for (int i = 0; i < playersList.Count; i++)
+            {
+                if (playersList[i].GetPlayerNumber() == numberToBan)
+                {
+                    playersList[i].BanUser();
+                }
+            }
+        }
+
+    public void UnBunPlayers()
+    {
+        Console.WriteLine("Введите номер который хотите разбанить");
+        int numberToUnbun = OperationWithPlayer();
+        
+        for (int i = 0; i < playersList.Count; i++)
+        {
+            if (playersList[i].GetPlayerNumber() == numberToUnbun)
+            {
+                playersList[i].UnBunUser();
+            }
+        }
+    }
+    public  void DeletePlayers()
+        {
+            Console.WriteLine("Введите номер который хотите удалить");
+            int numberToBan = OperationWithPlayer();
+
+            for (int i = 0; i < playersList.Count; i++)
+            {
+                if (playersList[i].GetPlayerNumber() == numberToBan)
+                {
+                    playersList.Remove(playersList[i]);
+                }
+            }
+        }
+
+        private static int OperationWithPlayer()
+        {
+            int numberToBan;
+            int.TryParse(Console.ReadLine(), out numberToBan);
+            return numberToBan;
+        }
+
+        public  void ShowAllPlayers()
+    {
+        for (int i = 0; i < playersList.Count; i++)
+        {
+            playersList[i].ShowInfo();
+        }
+    }
+
+        public void CreatPlayer()
+        {
+            int playerLevel;
+            int playerNumber;
+            Console.WriteLine("Введите имя");
+            string playerName = Console.ReadLine();
+            Console.WriteLine("Введиите порядковый номер");
+            int.TryParse(Console.ReadLine(), out playerNumber);
+            Console.WriteLine("Введите уровень");
+            int.TryParse(Console.ReadLine(), out playerLevel);
+            Player player = new Player(playerNumber, playerName, playerLevel);
+            playersList.Add(player);
+        }
     }
 }
+
    
 
 
