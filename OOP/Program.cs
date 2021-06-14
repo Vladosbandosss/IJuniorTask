@@ -55,9 +55,7 @@ namespace OOP
 
         private static void BunPlayers(List<Player> players)
         {
-            Console.WriteLine("Введите номер который хотите забанить");
-            int numberToBan;
-            int.TryParse(Console.ReadLine(), out numberToBan);
+            int numberToBan = CheckPlayerInput();
 
             for (int i = 0; i < players.Count; i++)
             {
@@ -68,11 +66,17 @@ namespace OOP
             }
         }
 
+        private static int CheckPlayerInput()
+        {
+            Console.WriteLine("Введите номер который хотите забанить");
+            int numberToBan;
+            int.TryParse(Console.ReadLine(), out numberToBan);
+            return numberToBan;
+        }
+
         private static void UnBunPlayers(List<Player> players)
         {
-            Console.WriteLine("Введите номер который хотите разбанить");
-            int numberToUnban;
-            int.TryParse(Console.ReadLine(), out numberToUnban);
+            int numberToUnban = CheckPlayerInput();
 
             for (int i = 0; i < players.Count; i++)
             {
@@ -85,9 +89,7 @@ namespace OOP
 
         private static void DeletePlayers(List<Player> players)
         {
-            Console.WriteLine("Ведите номер который хотите удалить");
-            int numberToDelete;
-            int.TryParse(Console.ReadLine(), out numberToDelete);
+            int numberToDelete = CheckPlayerInput();
 
             for (int i = 0; i < players.Count; i++)
             {
