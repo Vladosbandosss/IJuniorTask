@@ -8,162 +8,150 @@ namespace OOP
         static void Main(string[] args)
         {
             bool isWorking = true;
-            DataBase listPlayers = new DataBase();
-           
-          
+            Seller seller = new Seller(CreateGoods());
+            Costumer costumer = new Costumer("Павел", 100);
+            
             while (isWorking)
             {
-                Console.WriteLine("Добро пожаловать нажмите 1 что б добавить игрока,2 забанить,3 разабнить,4 удалить,5 выход");
-                try
-                {
-                    int userInput = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Добро пожаловать в магазин");
+                Console.WriteLine("Нажми 1 что б купить товар,нажми 2,что б посмотреть свои товары,3 что б выйти");
+                int userInput;
+                int.TryParse(Console.ReadLine(), out userInput);
 
-                    switch (userInput)
-                    {
-                        case 1:
-                            listPlayers.CreatPlayer();
-                            break;
-                        case 2:
-                            listPlayers.ShowAllPlayers();
-                            listPlayers.BunPlayers();
-                             break;
-                        case 3:
-                            listPlayers.ShowAllPlayers();
-                            listPlayers.UnBunPlayers();
-                            break;
-                        case 4:
-                            listPlayers.ShowAllPlayers();
-                            listPlayers.DeletePlayers();
-                            break;
-                        case 5:
-                            isWorking = false;
-                            break;
-                        default:
-                            Console.WriteLine("Ошибка");
-                            break;
-                    }
-                }
-                catch (Exception ex)
+                switch (userInput)
                 {
-                    Console.WriteLine("Ошибка ввода");
+                    case 1:
+                        BuyGoods(seller, costumer);
+                        break;
+                    case 2:
+                        Console.WriteLine("Давай посмотрим что у тебя есть");
+                        costumer.ShowCostumerGoods();
+                        break;
+                    case 3:
+                        isWorking = false;
+                        break;
+                    default:
+                        Console.WriteLine("Что-то не то");
+                        break;
                 }
             }
             Console.WriteLine("Программа завершена");
-        }
-    }
 
-         
-    class Player
-    {
-        private int _playerNumber;
-        private string _playerName;
-        private int _playerLevel;
-        private bool _isBan;
-
-        public Player(int number, string name, int level)
-        {
-            _playerNumber = number;
-            _playerName = name;
-            _playerLevel = level;
-            _isBan = false;
         }
 
-         public void ShowInfo()
+        private static void BuyGoods(Seller seller, Costumer costumer)
         {
-            Console.WriteLine($"номер {_playerNumber} имя {_playerName} уровень {_playerLevel} статус бана {_isBan}");
-        }
-        public void BanUser()
-        {
-            if (_isBan == false)
+            Console.WriteLine("Ты выбрал купить товары");
+            seller.ShowSellerGoods();
+            Console.WriteLine("У тебя есть " + costumer.ShowCostumerMoney());
+            Console.WriteLine("Выбери товар который хочешь купить");
+            int userWantBuy;
+            int.TryParse(Console.ReadLine(), out userWantBuy);
+            int finalUserDessicion = userWantBuy - 1;
+            costumer.BuyGoods(CreateGoods(), finalUserDessicion);
+            if (costumer.ShowCostumerMoney() >= seller.GetGoodPrice(finalUserDessicion))
             {
-                _isBan = true;
+                seller.SellGoods(finalUserDessicion);
             }
         }
-        public void UnBunUser()
+
+        public static List<Goods> CreateGoods()
         {
-            if (_isBan == true)
-            {
-                _isBan = false;
-            }
-        }
-        public int GetPlayerNumber()
-        {
-            return _playerNumber;
+            List<Goods> allGoods = new List<Goods>();
+            allGoods.Add (new Goods("Мяч", 50));
+            allGoods.Add(new Goods("Компьютер", 200));
+            allGoods.Add(new Goods("Чашка", 20));
+            allGoods.Add(new Goods("Ручка", 10));
+            allGoods.Add(new Goods("Кофе", 100));
+            return allGoods;
         }
     }
-
-    class DataBase
+   class Seller
     {
-      public  List<Player> playersList = new List<Player>();
+       private List<Goods> _goodsSellerList;
 
-        public  void BunPlayers()
+        public Seller(List<Goods> goodList)
         {
-            Console.WriteLine("Введите номер который хотите забанить");
-            int numberToBan = OperationWithPlayer();
-          
-            for (int i = 0; i < playersList.Count; i++)
+            _goodsSellerList = goodList;
+        }
+        public int GetGoodPrice(int index)
+        {
+            return _goodsSellerList[index].GetPriceGood();
+        }
+        public void ShowSellerGoods()
+        {
+            for (int i = 0; i < _goodsSellerList.Count; i++)
             {
-                if (playersList[i].GetPlayerNumber() == numberToBan)
+                Console.Write("Позиция " + (i + 1) + "  ");
+                _goodsSellerList[i].ShowGoodsDescription();
+            }
+        }
+        public void SellGoods(int userInput)
+        {
+            for (int i = 0; i <=_goodsSellerList.Count; i++)
+            {
+                if (userInput == i )
                 {
-                    playersList[i].BanUser();
+                    _goodsSellerList.Remove(_goodsSellerList[userInput]);
                 }
             }
         }
-
-    public void UnBunPlayers()
+    }
+    class Costumer
     {
-        Console.WriteLine("Введите номер который хотите разбанить");
-        int numberToUnbun = OperationWithPlayer();
+        private string _name;
+        private int _money;
+        private List<Goods> _costumerGoods = new List<Goods>();
+
+        public Costumer(string name,int money)
+        {
+            _name = name;
+            _money = money;
+        }
+        public int ShowCostumerMoney()
+        {
+            return _money;
+        }
+        public void ShowCostumerGoods()
+        {
+            for (int i = 0; i < _costumerGoods.Count; i++)
+            {
+               _costumerGoods[i].ShowGoodsDescription();
+            }
+        }
+        public void BuyGoods(List<Goods>list,int userChoise)
+        {
+           
+            if (_money >=list[userChoise].GetPriceGood())
+            {
+                _costumerGoods.Add(list[userChoise]);
+                _money -= list[userChoise].GetPriceGood();
+            }
+            else
+            {
+                Console.WriteLine("Недостаточно денег");
+               
+            }
+           
+        }
+    }
+    class Goods
+    {
+        private string _name;
+        private int _price;
         
-        for (int i = 0; i < playersList.Count; i++)
+        public Goods(string name,int price)
         {
-            if (playersList[i].GetPlayerNumber() == numberToUnbun)
-            {
-                playersList[i].UnBunUser();
-            }
+            _name = name;
+            _price = price;
         }
-    }
-    public  void DeletePlayers()
+        public void ShowGoodsDescription()
         {
-            Console.WriteLine("Введите номер который хотите удалить");
-            int numberToBan = OperationWithPlayer();
-
-            for (int i = 0; i < playersList.Count; i++)
-            {
-                if (playersList[i].GetPlayerNumber() == numberToBan)
-                {
-                    playersList.Remove(playersList[i]);
-                }
-            }
+            Console.WriteLine($"Товар {_name} цена {_price}"); 
         }
-
-        private static int OperationWithPlayer()
+        public int GetPriceGood()
         {
-            int numberToBan;
-            int.TryParse(Console.ReadLine(), out numberToBan);
-            return numberToBan;
-        }
-
-        public  void ShowAllPlayers()
-    {
-        for (int i = 0; i < playersList.Count; i++)
-        {
-            playersList[i].ShowInfo();
-        }
-    }
-
-        public void CreatPlayer()
-        {
-            int playerLevel;
-            int playerNumber;
-            Console.WriteLine("Введите имя");
-            string playerName = Console.ReadLine();
-            Console.WriteLine("Введиите порядковый номер");
-            int.TryParse(Console.ReadLine(), out playerNumber);
-            Console.WriteLine("Введите уровень");
-            int.TryParse(Console.ReadLine(), out playerLevel);
-            Player player = new Player(playerNumber, playerName, playerLevel);
-            playersList.Add(player);
+            return _price;
         }
     }
 }
