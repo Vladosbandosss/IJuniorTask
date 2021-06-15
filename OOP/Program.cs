@@ -7,7 +7,7 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            Arene arene = new Arene();
+            Arena arene = new Arena();
             
             arene.AddWarriots(CreateWarriors());
            
@@ -15,7 +15,7 @@ namespace OOP
 
             while (isBattleArene)
             {
-                int userInput = AreneFight(arene);
+                int userInput = FightArena(arene);
 
                 switch (userInput)
                 {
@@ -33,7 +33,7 @@ namespace OOP
             Console.WriteLine("Программа завершена");
         }
 
-        private static int AreneFight(Arene arene)
+        private static int FightArena(Arena arene)
         {
             Console.WriteLine("Добро пожаловать на бой!Вот список бойцов");
             arene.ShowWarriotInfo();
@@ -117,7 +117,7 @@ namespace OOP
         }
     }
     
-    class Arene
+    class Arena
     {
         List<Warrior> listWarriors = new List<Warrior>();
 
