@@ -8,99 +8,61 @@ namespace Linq
     {
         static void Main(string[] args)
         {
-            List<Murder> murdersList = new List<Murder>();
-            murdersList.AddRange(CreateMurders());
+            List<Person> persons = new List<Person>();
+            persons.AddRange(CreatePersons());
+            Console.WriteLine("Люди в тюрьме"); 
 
-            FindMurders(murdersList);
+            for (int i = 0; i < persons.Count; i++)
+            {
+                persons[i].ShowDescription();
+            }
+
+            var amnistiaMurders = persons.Where(prest => prest.GetMurderInfo() != "Антиправительственное").ToList();
+
+            Console.WriteLine("Вот список людей которые остануться в тюрьме");
+            foreach (var item in amnistiaMurders)
+            {
+                item.ShowDescription();
+            }
+
 
         }
 
-        private static void FindMurders(List<Murder> murdersList)
+        private static List<Person> CreatePersons()
         {
-            Console.WriteLine("Добро пожаловать в поиск!");
-            Console.WriteLine("Введите рост преступника");
-            int hightMurder;
-            int.TryParse(Console.ReadLine(), out hightMurder);
-            Console.WriteLine("Введите возраст преступника");
-            int ageMurder;
-            int.TryParse(Console.ReadLine(), out ageMurder);
-            Console.WriteLine("Введите национлаьность");
-            string nationalityMurser = Console.ReadLine();
-
-            var userResult = murdersList.Where(murderSearch => murderSearch.GerArest() == false)
-                .Where(murderSearch => murderSearch.GetAge() == ageMurder)
-                .Where(murderSearch => murderSearch.GetHeight() == hightMurder)
-                .Where(murderSearch => murderSearch.GetNation() == nationalityMurser).ToArray();
-
-            if (userResult.Count() > 0)
-            {
-                foreach (var item in userResult)
-                {
-                    item.ShowMurderDesctiption();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Данные не найдены");
-            }
-        }
-
-        private static List<Murder> CreateMurders()
-        {
-            List<Murder> mursderList = new List<Murder>();
-            Murder firstMurder = new Murder("Vlad", true, 190, 20, "Belarus");
-            mursderList.Add(firstMurder);
-            Murder secondMurder = new Murder("Pavel", false, 180, 30, "Ukraine");
-            mursderList.Add(secondMurder);
-            Murder forthMurder = new Murder("Vova", false, 150, 29, "Belarus");
-            mursderList.Add(forthMurder);
-            Murder fifthMurder = new Murder("Zoy", false, 180, 30, "Belarus");
-            mursderList.Add(fifthMurder);
-            Murder sixMurder = new Murder("Sasha", true, 145, 50, "Russia");
-            mursderList.Add(sixMurder);
-            return mursderList;
+            List<Person> personList = new List<Person>();
+            Person firstPerson = new Person("Vlad","Воровство");
+            personList.Add(firstPerson);
+            Person secondPerson = new Person("Pasha","Воровство");
+            personList.Add(secondPerson);
+            Person thirdPerson = new Person("Roma","Антиправительственное");
+            personList.Add(thirdPerson);
+            Person fourthPerson = new Person("Sasha","Антиправительственное");
+            personList.Add(fourthPerson);
+            Person fifthPerson = new Person("Katya","Антиправительственное");
+            personList.Add(fifthPerson);
+            return personList;
         }
     }
-    class Murder
+    class Person
     {
-        private string _fio;
-        private bool _isArested;
-        private int _height;
-        private int _age;
-        private string _nation;
+        private string _name;
+        private string _murderInfo;
 
-        public Murder(string fio,bool isArest,int height,int age,string nation)
+        public Person(string name,string murderInfo)
         {
-            _fio = fio;
-            _isArested = isArest;
-            _height = height;
-            _age = age;
-            _nation = nation;
-        }
-        public void ShowMurderDesctiption()
-        {
-            Console.WriteLine($"ФИО {_fio} статус ареста {_isArested} рост {_height} возраст {_age} национальность {_nation} ");
-        }
-        public string GetFio()
-        {
-            return _fio;
+            _name = name;
+            _murderInfo = murderInfo;
         }
 
-        public bool GerArest()
+        public void ShowDescription()
         {
-            return _isArested;
+         Console.WriteLine($"{_name} преступление  {_murderInfo}");
         }
-        public int GetAge()
+
+        public string GetMurderInfo()
         {
-            return _age;
-        }
-        public int GetHeight()
-        {
-            return _height;
-        }
-        public string GetNation()
-        {
-            return _nation;
+            return _murderInfo;
         }
     }
 }
