@@ -8,61 +8,56 @@ namespace Linq3
     {
         static void Main(string[] args)
         {
-            int currentYear = 2021;
-            List<Meal> mealList = new List<Meal>();
-            mealList.AddRange(CreateMeal());
+            List<Solder> sorderSortList = new List<Solder>();
+            List<Solder> solderList = new List<Solder>();
+            solderList.AddRange(CreateSolders());
+            var filtr = solderList.Where(x => x.GetSurname().StartsWith("Б")).ToList();
+            sorderSortList.AddRange(filtr);
 
-            var badMeal = mealList.Where(meal => meal.GetExpire() + meal.GetReproduce() < currentYear).ToList();
-            Console.WriteLine("Вывожу просрочку");
-
-            foreach (var item in badMeal)
+            foreach (var item in sorderSortList)
             {
-                item.ShowDescriptionName();
+                item.ShowDescription();
             }
+            
+
 
         }
 
-        private static List<Meal> CreateMeal()
+        private static List<Solder> CreateSolders()
         {
-            List<Meal> mealList = new List<Meal>();
-            Meal firstMeal = new Meal("Бородинская", 2000, 30);
-            Meal secondMeal = new Meal("Варшавская", 2005, 5);
-            Meal thirdMeal = new Meal("Крымская", 2010, 30);
-            Meal fourthMeal = new Meal("Русская", 2009, 30);
-            Meal fifthMeal = new Meal("Норвежская", 2010, 5);
-            mealList.Add(firstMeal);
-            mealList.Add(secondMeal);
-            mealList.Add(thirdMeal);
-            mealList.Add(fourthMeal);
-            mealList.Add(fifthMeal);
-            return mealList;
+            Solder firstSolder = new Solder("Влад", "Большов", 20);
+            Solder secondSolder = new Solder("Рома", "Путров", 30);
+            Solder thirdSolder = new Solder("Паша", "Боловв", 25);
+            Solder fourhSolder = new Solder("Саша", "Троц", 21);
+            Solder fifthSolder = new Solder("Демьян", "Бостов", 24);
+            List<Solder> solderList = new List<Solder>();
+            solderList.Add(firstSolder);
+            solderList.Add(secondSolder);
+            solderList.Add(thirdSolder);
+            solderList.Add(fourhSolder);
+            solderList.Add(fifthSolder);
+            return solderList;
         }
     }
-    class Meal
+    class Solder
     {
         private string _name;
-        private int _yearReproduce;
-        private int _expireYear;
-
-        public Meal(string name,int reproduce,int expire)
+        private string _surname;
+        private int _age;
+        
+        public Solder(string name,string surname,int age)
         {
             _name = name;
-            _yearReproduce = reproduce;
-            _expireYear = expire;
+            _surname = surname;
+            _age = age;
         }
-
-        public int GetReproduce()
+        public string GetSurname()
         {
-            return _yearReproduce;
+            return _surname;
         }
-        public int GetExpire()
+        public void ShowDescription()
         {
-            return _expireYear;
+            Console.WriteLine($"имя {_name} фамилия { _surname} возраст { _age}");
         }
-        public void ShowDescriptionName()
-        {
-            Console.WriteLine($"Название {_name}");
-        }
-
     }
 }
