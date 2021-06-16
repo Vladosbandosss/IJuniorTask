@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,76 +9,65 @@ namespace Linq2
     {
         static void Main(string[] args)
         {
-            List<Player> playerList = new List<Player>();
-             playerList.AddRange(CreatePlayers());
-            var threeTopLevel = playerList.Where(x => x.GetLevel() > 0).OrderByDescending(x => x.GetLevel()).Take(3).ToList();
-            Console.WriteLine("Топ 3 по уровню");
+            List<Solder> solderList = new List<Solder>();
+            solderList.AddRange(CreateSolders());
 
-            foreach (var item in threeTopLevel)
+            var resultNameRank = solderList.Select(x => new
             {
-                item.ShowDescription();
-            }
-
-            Console.WriteLine("Топ 3 по силе");
-            var threeTopPower = playerList.Where(x => x.GetLevel() > 0).OrderByDescending(x => x.GetPower()).Take(3).ToList();
-
-            foreach (var item in threeTopPower)
-            {
-                item.ShowDescription();
-            }
+                Name =solderList.Select(p=>p.GetName()),
+                Rank=solderList.Select(x=>x.GerRank())
+            }).ToArray();
         }
 
-        private static List<Player> CreatePlayers()
+        private static List<Solder> CreateSolders()
         {
-            List<Player> playerList = new List<Player>();
-            Player firsrtPlayer = new Player("Vlad", 10, 5);
-            playerList.Add(firsrtPlayer);
-            Player secondPlayer = new Player("Rome", 5, 50);
-            playerList.Add(secondPlayer);
-            Player thirdPlayer = new Player("Vova", 20, 8);
-            playerList.Add(thirdPlayer);
-            Player fourthPlayer = new Player("Vadim", 200, 7);
-            playerList.Add(fourthPlayer);
-            Player fifthPlayer = new Player("Sasha", 30, 12);
-            playerList.Add(fifthPlayer);
-            Player sixPlayer = new Player("Vlados", 500, 50);
-            playerList.Add(sixPlayer);
-            Player sevenPlayer = new Player("Vard", 100, 25);
-            playerList.Add(sevenPlayer);
-            Player eightPlayer = new Player("Rav", 105, 55);
-            playerList.Add(eightPlayer);
-            Player ninePlayer = new Player("Jan", 107, 52);
-            playerList.Add(ninePlayer);
-            Player tenPlayer = new Player("Cac", 103, 25);
-            playerList.Add(tenPlayer);
-            return playerList;
-         }
+            Solder firstSolder = new Solder("Вова", "Танкист", "Полковник", 5);
+            Solder secondSolder = new Solder("Влад", "Мотоциклист", "Майор", 10);
+            Solder thirdSolder = new Solder("Рома", "Пехота", "Лейтенант", 2);
+            Solder fourhSolder = new Solder("Паша", "Авиация", "Генерал", 35);
+            Solder fifthSolder = new Solder("Саша", "Снайпер", "Складовик", 13);
+
+            List<Solder> listSolder = new List<Solder>();
+            listSolder.Add(firstSolder);
+            listSolder.Add(secondSolder);
+            listSolder.Add(thirdSolder);
+            listSolder.Add(fourhSolder);
+            listSolder.Add(fifthSolder);
+
+            return listSolder;
+        }
     }
-    class Player
+    class Solder
     {
         private string _name;
-        private int _level;
-        private int _power;
-        
-        public Player(string name,int level,int power)
+        private string _armament;
+        private string _rank;
+        private int _countMonth;
+       
+        public Solder(string name,string armament,string rank,int countMonth)
         {
             _name = name;
-            _level = level;
-            _power = power;
+            _armament = armament;
+            _rank = rank;
+            _countMonth = countMonth;
         }
 
-        public int GetLevel()
+        public string GetName()
         {
-            return _level;
+            return _name;
         }
-
-        public int GetPower()
+        public string GetArmament()
         {
-            return _power;
+            return _armament;
         }
-        public void ShowDescription()
+        public string GerRank()
         {
-            Console.WriteLine($"зовут {_name} уровень {_level} сила {_power}");
+            return _rank;
         }
+        public int GetMonth()
+        {
+            return _countMonth;
+        }
+      
     }
 }
