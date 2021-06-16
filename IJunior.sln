@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectionsTask", "Collecti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP", "OOP\OOP.csproj", "{A1E8C6D3-AF66-4924-8E0C-818A22F9B8F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linq", "Linq\Linq.csproj", "{46C3EC4B-7CAF-4CA2-9CCD-3AAD04F85F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linq", "Linq\Linq.csproj", "{46C3EC4B-7CAF-4CA2-9CCD-3AAD04F85F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linq2", "Linq2\Linq2.csproj", "{8D5E820E-1FFC-4DFB-9723-3273180C016E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{46C3EC4B-7CAF-4CA2-9CCD-3AAD04F85F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C3EC4B-7CAF-4CA2-9CCD-3AAD04F85F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C3EC4B-7CAF-4CA2-9CCD-3AAD04F85F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D5E820E-1FFC-4DFB-9723-3273180C016E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D5E820E-1FFC-4DFB-9723-3273180C016E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D5E820E-1FFC-4DFB-9723-3273180C016E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D5E820E-1FFC-4DFB-9723-3273180C016E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
