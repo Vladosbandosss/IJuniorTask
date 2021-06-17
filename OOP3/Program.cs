@@ -55,7 +55,28 @@ namespace OOP3
                 _fishList.Add(fish);
                 Console.WriteLine("Рыбка добавлена");
             }
-            
+            else
+            {
+                Console.WriteLine("Слишком много рыбок");
+            }
+        }
+      public void DeleteFishAqua(int userChoise)
+        {
+            if (_fishList.Count() > _minFish)
+            {
+                _fishList.Remove(_fishList[userChoise-1]);
+            }
+            else
+            {
+                Console.WriteLine("У нас тогда не будет рыбок(");
+            }
+        }
+        public void ShowAquarium()
+        {
+            for (int i = 0; i < _fishList.Count(); i++)
+            {
+                _fishList[i].ShowDescription();
+            }
         }
     }
 }

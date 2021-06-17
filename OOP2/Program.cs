@@ -17,11 +17,11 @@ namespace OOP2
             Animal hamster = new Hamster("Хомяк", "Женский", 3, "Я только кушаю");
             Animal rabit = new Rabbit("Кролик", "Женский", 1, "хррррр");
             Zoo zoo = new Zoo();
-            zoo.AddToZoo(wolf);
-            zoo.AddToZoo(fox);
-            zoo.AddToZoo(hamster);
-            zoo.AddToZoo(rabit);
-            zoo.WelcomeZoo();
+            zoo.AddAnimal(wolf);
+            zoo.AddAnimal(fox);
+            zoo.AddAnimal(hamster);
+            zoo.AddAnimal(rabit);
+            zoo.VisitAnimals();
         }
     }
     class Animal
@@ -94,12 +94,14 @@ namespace OOP2
     }
     class Zoo
     {
-        List<Animal> listAnimals = new List<Animal>();
-        public void AddToZoo(Animal animal)
+       private List<Animal> _animalsRouster = new List<Animal>();
+
+        public void AddAnimal(Animal animal)
         {
-            listAnimals.Add(animal);
+            _animalsRouster.Add(animal);
         }
-        public void WelcomeZoo()
+
+        public void VisitAnimals()
         {
            bool isWorking = true;
 
@@ -108,6 +110,7 @@ namespace OOP2
                 isWorking = ChoseInZoo(isWorking);
             }
         }
+
         private bool ChoseInZoo(bool isWorking)
         {
             Console.WriteLine("Добро пожаловать в зоопарк");
@@ -118,16 +121,16 @@ namespace OOP2
             switch (userInput)
             {
                 case 1:
-                    listAnimals[0].ShowInfo();
+                    _animalsRouster[0].ShowInfo();
                     break;
                 case 2:
-                    listAnimals[1].ShowInfo();
+                    _animalsRouster[1].ShowInfo();
                     break;
                 case 3:
-                    listAnimals[2].ShowInfo();
+                    _animalsRouster[2].ShowInfo();
                     break;
                 case 4:
-                    listAnimals[3].ShowInfo();
+                    _animalsRouster[3].ShowInfo();
                     break;
                 case 5:
                     Console.WriteLine("Пока");
