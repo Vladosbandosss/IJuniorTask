@@ -46,7 +46,7 @@ namespace OOP
         }
     }
 
-    class Warior {
+    class Warior : Hero {
         private int _health;
         private int _damage_;
         private int _armor;
@@ -63,8 +63,10 @@ namespace OOP
 
         public int GetHealth()
         {
+           
             return _health;
         }
+
         public int GetDamege()
         {
             return _damage_;
@@ -77,15 +79,26 @@ namespace OOP
         {
             return _uniqueAtack;
         }
+        
             
+    }
+
+    abstract class Hero
+    {
+        public int superAbiliti;
+        public int SuperPower()
+        {
+            Random random = new Random();
+            superAbiliti = random.Next(1, 11);
+            return superAbiliti;
+
+        }
     }
 
     class FightPlace
     {
-      
-
-        public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
-        {
+         public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
+         {
             Console.WriteLine("Начинаем бой!");
             int firsTeamCount = 0;
             int secondTeamCount = 0;
