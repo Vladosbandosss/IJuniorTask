@@ -9,43 +9,32 @@ namespace OOP
         static void Main(string[] args)
         {
             List<Warior> firstTeam = new List<Warior>();
-            firstTeam.AddRange(CreateFirstTeam());
+            firstTeam.AddRange(CreateTeam());
 
             List<Warior> secondTeam = new List<Warior>();
-            secondTeam.AddRange(CreateSecondTeam());
+            secondTeam.AddRange(CreateTeam());
 
             FightPlace fightPlace = new FightPlace();
             fightPlace.Fight(firstTeam, secondTeam);
 
         }
 
-        private static List<Warior> CreateSecondTeam()
+        private static List<Warior> CreateTeam()
         {
-            Warior seconsTeamOne = new Warior(200, 5, 5);
-            Warior seconsTeamTwo = new Warior(105, 20, 0);
-            Warior seconsTeamThree = new Warior(90, 7, 4);
-
-            List<Warior> secondTeam = new List<Warior>();
-            secondTeam.Add(seconsTeamOne);
-            secondTeam.Add(seconsTeamTwo);
-            secondTeam.Add(seconsTeamThree);
-            return secondTeam;
-        }
-
-        private static List<Warior> CreateFirstTeam()
-        {
-            Warior firstTeamOne = new Warior(100, 20, 10);
-            Warior firstTeamTwo = new Warior(105, 30, 5);
-            Warior firstTeamThree = new Warior(110, 35, 6);
-
-            List<Warior> firstTeam = new List<Warior>();
-            firstTeam.Add(firstTeamOne);
-            firstTeam.Add(firstTeamTwo);
-            firstTeam.Add(firstTeamThree);
-            return firstTeam;
+            List<Warior> wariorsTeam = new List<Warior>();
+            Random random = new Random();
+            for (int i = 0; i < 3; i++)
+            {
+                int health = random.Next(50, 100);
+                int damage = random.Next(10, 16);
+                int armor = random.Next(1, 11);
+                Warior warior = new Warior(health, damage, armor);
+                wariorsTeam.Add(warior);
+            }
+             return wariorsTeam;
         }
     }
-
+       
     class Warior : Hero {
         private int _health;
         private int _damage_;
@@ -63,8 +52,7 @@ namespace OOP
 
         public int GetHealth()
         {
-           
-            return _health;
+          return _health;
         }
 
         public int GetDamege()
@@ -79,11 +67,8 @@ namespace OOP
         {
             return _uniqueAtack;
         }
-        
-            
     }
-
-    abstract class Hero
+      abstract class Hero
     {
         public int superAbiliti;
         public int SuperPower()
@@ -91,29 +76,47 @@ namespace OOP
             Random random = new Random();
             superAbiliti = random.Next(1, 11);
             return superAbiliti;
-
         }
-    }
+    }  
 
     class FightPlace
     {
          public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
-         {
+        {
             Console.WriteLine("Начинаем бой!");
             int firsTeamCount = 0;
             int secondTeamCount = 0;
 
+            FightTeam(firstTeam, secondTeam, ref firsTeamCount, ref secondTeamCount);
+
+            Console.WriteLine("Бой завершен");
+
+            if (firsTeamCount > secondTeamCount)
+            {
+                Console.WriteLine("Победила первая команда");
+            }
+            else if (firsTeamCount < secondTeamCount)
+            {
+                Console.WriteLine("Победила вторая команда");
+            }
+            else
+            {
+                Console.WriteLine("Ничья");
+            }
+        }
+
+        private static void FightTeam(List<Warior> firstTeam, List<Warior> secondTeam, ref int firsTeamCount, ref int secondTeamCount)
+        {
             for (int i = 0; i < firstTeam.Count; i++)
             {
-                
                 bool isFight = true;
-                int firstTeamHealth = firstTeam[i].GetHealth();
-                int secondTeamHealth = secondTeam[i].GetHealth();
+                int firstTeamHealth = firstTeam[i].GetHealth()+firstTeam[i].superAbiliti;
+                int secondTeamHealth = secondTeam[i].GetHealth()+secondTeam[i].superAbiliti;
 
                 while (isFight)
                 {
-                    firstTeamHealth -= (secondTeam[i].GetDamege()+secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
-                    secondTeamHealth -= (firstTeam[i].GetDamege()+firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
+                    firstTeamHealth -= (secondTeam[i].GetDamege() + secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
+                    secondTeamHealth -= (firstTeam[i].GetDamege() + firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
 
                     if (firstTeamHealth < 0 && secondTeamHealth > 0)
                     {
@@ -130,19 +133,6 @@ namespace OOP
                         isFight = false;
                     }
                 }
-            }
-            Console.WriteLine("Бой завершен");
-
-            if (firsTeamCount > secondTeamCount)
-            {
-                Console.WriteLine("Победила первая команда");
-            }else if (firsTeamCount < secondTeamCount)
-            {
-                Console.WriteLine("Победила вторая команда");
-            }
-            else
-            {
-                Console.WriteLine("Ничья");
             }
         }
     }
