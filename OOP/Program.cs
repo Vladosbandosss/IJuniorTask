@@ -50,9 +50,12 @@ namespace OOP
         private int _health;
         private int _damage_;
         private int _armor;
+        private int _uniqueAtack;
 
         public Warior(int health,int damage,int armor)
         {
+            Random random = new Random();
+            _uniqueAtack = random.Next(1, 11);
             _health = health;
             _damage_ = damage;
             _armor = armor;
@@ -69,6 +72,10 @@ namespace OOP
         public int GetArmor()
         {
             return _armor;
+        }
+        public int GetUnique()
+        {
+            return _uniqueAtack;
         }
             
     }
@@ -92,8 +99,8 @@ namespace OOP
 
                 while (isFight)
                 {
-                    firstTeamHealth -= secondTeam[i].GetDamege() + firstTeam[i].GetArmor();
-                    secondTeamHealth -= firstTeam[i].GetDamege() + secondTeam[i].GetArmor();
+                    firstTeamHealth -= (secondTeam[i].GetDamege()+secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
+                    secondTeamHealth -= (firstTeam[i].GetDamege()+firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
 
                     if (firstTeamHealth < 0 && secondTeamHealth > 0)
                     {
