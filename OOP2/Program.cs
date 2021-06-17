@@ -27,20 +27,20 @@ namespace OOP2
     class Animal
     {
         private string _name;
-        private string _pol;
+        private string _sex;
         private int _age;
         private string _sound;
 
-        public Animal(string name,string pol,int age,string sound)
+        public Animal(string name,string sex,int age,string sound)
         {
             _name = name;
-            _pol = pol;
+            _sex = sex;
             _age = age;
             _sound = sound;
         }
         public void ShowInfo()
         {
-            Console.WriteLine($"я {_name} мой пол {_pol} мне {_age} мой звук {_sound}");
+            Console.WriteLine($"я {_name} мой пол {_sex} мне {_age} мой звук {_sound}");
         }
     }
     class Wolf : Animal
