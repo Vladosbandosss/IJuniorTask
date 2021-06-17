@@ -29,69 +29,67 @@ namespace OOP2
         private string _name;
         private string _pol;
         private int _age;
+        private string _sound;
 
-        public Animal(string name,string pol,int age)
+        public Animal(string name,string pol,int age,string sound)
         {
             _name = name;
             _pol = pol;
             _age = age;
+            _sound = sound;
         }
         public void ShowInfo()
         {
-            Console.WriteLine($"я {_name} мой пол {_pol} мне {_age}");
+            Console.WriteLine($"я {_name} мой пол {_pol} мне {_age} мой звук {_sound}");
         }
     }
     class Wolf : Animal
     {
-        private string _zvuk;
-        public Wolf(string name, string pol, int age,string zvuk) : base(name, pol, age)
+      public Wolf(string name, string pol, int age,string sound) : base(name, pol, age,sound)
         {
-            _zvuk = zvuk;
+           
         }
        public new void ShowInfo()
         {
             base.ShowInfo();
-            Console.WriteLine("А вот мой звук " + _zvuk);
+            Console.WriteLine("Я люблю охотиться");
         }
     }
 
     class Fox : Animal
     {
-        private string _zvuk;
-        public Fox(string name, string pol, int age, string zvuk) : base(name, pol, age)
+      public Fox(string name, string pol, int age, string sound) : base(name, pol, age, sound)
         {
-            _zvuk = zvuk;
+            
         }
         public new void ShowInfo()
         {
             base.ShowInfo();
-            Console.WriteLine("А вот мой звук " + _zvuk);
+            Console.WriteLine("Я люблю курочек");
         }
     }
     class Hamster : Animal
     {
-        private string _zvuk;
-        public Hamster(string name, string pol, int age, string zvuk) : base(name, pol, age)
+      public Hamster(string name, string pol, int age, string sound) : base(name, pol, age, sound)
         {
-            _zvuk = zvuk;
+          
         }
         public new void ShowInfo()
         {
             base.ShowInfo();
-            Console.WriteLine("А вот мой звук " + _zvuk);
+            Console.WriteLine("Люблю кушать");
         }
     }
     class Rabbit : Animal
     {
-        private string _zvuk;
-        public Rabbit(string name, string pol, int age, string zvuk) : base(name, pol, age)
+        public Rabbit(string name, string pol, int age, string sound) : base(name, pol, age, sound)
         {
-            _zvuk = zvuk;
+           
         }
         public new void ShowInfo()
         {
             base.ShowInfo();
-            Console.WriteLine("А вот мой звук " + _zvuk);
+            Console.WriteLine("Люблю морковку");
         }
     }
     class Zoo
