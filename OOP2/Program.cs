@@ -101,7 +101,6 @@ namespace OOP2
         {
             listAnimals.Add(animal);
         }
-
         public void WelcomeZoo()
         {
            bool isWorking = true;
@@ -111,7 +110,6 @@ namespace OOP2
                 isWorking = ChoseInZoo(isWorking);
             }
         }
-
         private bool ChoseInZoo(bool isWorking)
         {
             Console.WriteLine("Добро пожаловать в зоопарк");
@@ -141,8 +139,7 @@ namespace OOP2
                     Console.WriteLine("Ошибка выбора");
                     break;
             }
-
-            return isWorking;
+        return isWorking;
         }
     }
 }
