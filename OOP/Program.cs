@@ -8,25 +8,123 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Вводи число");
-            string userInput = Console.ReadLine();
-            int[] userMas = new int[5];
+            List<Warior> firstTeam = new List<Warior>();
+            firstTeam.AddRange(CreateFirstTeam());
 
-            for (int i = 0; i < userInput.Length; i++)
+            List<Warior> secondTeam = new List<Warior>();
+            secondTeam.AddRange(CreateSecondTeam());
+
+            FightPlace fightPlace = new FightPlace();
+            fightPlace.Fight(firstTeam, secondTeam);
+
+        }
+
+        private static List<Warior> CreateSecondTeam()
+        {
+            Warior seconsTeamOne = new Warior(200, 5, 5);
+            Warior seconsTeamTwo = new Warior(105, 20, 0);
+            Warior seconsTeamThree = new Warior(90, 7, 4);
+
+            List<Warior> secondTeam = new List<Warior>();
+            secondTeam.Add(seconsTeamOne);
+            secondTeam.Add(seconsTeamTwo);
+            secondTeam.Add(seconsTeamThree);
+            return secondTeam;
+        }
+
+        private static List<Warior> CreateFirstTeam()
+        {
+            Warior firstTeamOne = new Warior(100, 20, 10);
+            Warior firstTeamTwo = new Warior(105, 30, 5);
+            Warior firstTeamThree = new Warior(110, 35, 6);
+
+            List<Warior> firstTeam = new List<Warior>();
+            firstTeam.Add(firstTeamOne);
+            firstTeam.Add(firstTeamTwo);
+            firstTeam.Add(firstTeamThree);
+            return firstTeam;
+        }
+    }
+
+    class Warior {
+        private int _health;
+        private int _damage_;
+        private int _armor;
+
+        public Warior(int health,int damage,int armor)
+        {
+            _health = health;
+            _damage_ = damage;
+            _armor = armor;
+        }
+
+        public int GetHealth()
+        {
+            return _health;
+        }
+        public int GetDamege()
+        {
+            return _damage_;
+        }
+        public int GetArmor()
+        {
+            return _armor;
+        }
+            
+    }
+
+    class FightPlace
+    {
+      
+
+        public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
+        {
+            Console.WriteLine("Начинаем бой");
+            int firsTeamCount = 0;
+            int secondTeamCount = 0;
+
+            for (int i = 0; i < firstTeam.Count; i++)
             {
-                Console.WriteLine(userInput[i]);
-                userMas[i] = Convert.ToInt32( userInput[i].ToString());
-            }
+                
+                bool isFight = true;
+                int firstTeamHealth = firstTeam[i].GetHealth();
+                int secondTeamHealth = secondTeam[i].GetHealth();
 
-            foreach (var item in userMas)
+                while (isFight)
+                {
+                    firstTeamHealth -= secondTeam[i].GetDamege() + firstTeam[i].GetArmor();
+                    secondTeamHealth -= firstTeam[i].GetDamege() + secondTeam[i].GetArmor();
+
+                    if (firstTeamHealth < 0 && secondTeamHealth > 0)
+                    {
+                        secondTeamCount++;
+                        isFight = false;
+                    }
+                    if (firstTeamHealth > 0 && secondTeamHealth < 0)
+                    {
+                        firsTeamCount++;
+                        isFight = false;
+                    }
+                    if (firstTeamHealth <= 0 && secondTeamHealth <= 0)
+                    {
+                        isFight = false;
+                    }
+                }
+            }
+            Console.WriteLine("Бой завершен");
+
+            if (firsTeamCount > secondTeamCount)
             {
-                Console.WriteLine(item);
+                Console.WriteLine("Победила первая команда");
+            }else if (firsTeamCount < secondTeamCount)
+            {
+                Console.WriteLine("Победила вторая команда");
             }
-            int sum = userMas.Sum();
-
-            Console.WriteLine(sum);
-       }
-        
+            else
+            {
+                Console.WriteLine("Ничья");
+            }
+        }
     }
 }
 
