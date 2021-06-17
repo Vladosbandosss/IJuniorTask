@@ -37,7 +37,7 @@ namespace OOP
        
     class Warior : Hero {
         private int _health;
-        private int _damage_;
+        private int _damage;
         private int _armor;
         private int _uniqueAtack;
 
@@ -46,7 +46,7 @@ namespace OOP
             Random random = new Random();
             _uniqueAtack = random.Next(1, 11);
             _health = health;
-            _damage_ = damage;
+            _damage = damage;
             _armor = armor;
         }
 
@@ -57,7 +57,7 @@ namespace OOP
 
         public int GetDamege()
         {
-            return _damage_;
+            return _damage;
         }
         public int GetArmor()
         {
@@ -110,28 +110,31 @@ namespace OOP
             for (int i = 0; i < firstTeam.Count; i++)
             {
                 bool isFight = true;
-                int firstTeamHealth = firstTeam[i].GetHealth()+firstTeam[i].superAbiliti;
-                int secondTeamHealth = secondTeam[i].GetHealth()+secondTeam[i].superAbiliti;
+                int firstTeamHealth = firstTeam[i].GetHealth() + firstTeam[i].superAbiliti;
+                int secondTeamHealth = secondTeam[i].GetHealth() + secondTeam[i].superAbiliti;
+                Fight(firstTeam, secondTeam, ref firsTeamCount, ref secondTeamCount, i, ref isFight, ref firstTeamHealth, ref secondTeamHealth);
+            }
+        }
+        private static void Fight(List<Warior> firstTeam, List<Warior> secondTeam, ref int firsTeamCount, ref int secondTeamCount, int i, ref bool isFight, ref int firstTeamHealth, ref int secondTeamHealth)
+        {
+            while (isFight)
+            {
+                firstTeamHealth -= (secondTeam[i].GetDamege() + secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
+                secondTeamHealth -= (firstTeam[i].GetDamege() + firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
 
-                while (isFight)
+                if (firstTeamHealth < 0 && secondTeamHealth > 0)
                 {
-                    firstTeamHealth -= (secondTeam[i].GetDamege() + secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
-                    secondTeamHealth -= (firstTeam[i].GetDamege() + firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
-
-                    if (firstTeamHealth < 0 && secondTeamHealth > 0)
-                    {
-                        secondTeamCount++;
-                        isFight = false;
-                    }
-                    if (firstTeamHealth > 0 && secondTeamHealth < 0)
-                    {
-                        firsTeamCount++;
-                        isFight = false;
-                    }
-                    if (firstTeamHealth <= 0 && secondTeamHealth <= 0)
-                    {
-                        isFight = false;
-                    }
+                    secondTeamCount++;
+                    isFight = false;
+                }
+                if (firstTeamHealth > 0 && secondTeamHealth < 0)
+                {
+                    firsTeamCount++;
+                    isFight = false;
+                }
+                if (firstTeamHealth <= 0 && secondTeamHealth <= 0)
+                {
+                    isFight = false;
                 }
             }
         }
