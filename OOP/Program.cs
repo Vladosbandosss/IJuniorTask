@@ -86,7 +86,7 @@ namespace OOP
 
         public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
         {
-            Console.WriteLine("Начинаем бой");
+            Console.WriteLine("Начинаем бой!");
             int firsTeamCount = 0;
             int secondTeamCount = 0;
 
