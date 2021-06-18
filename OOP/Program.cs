@@ -22,6 +22,7 @@ namespace OOP
                         Console.WriteLine("Давай создавай пассажиров нажми exit что б прекратить");
                         bool isCreating = true;
                         List<Person> personList = new List<Person>();
+
                         while (isCreating)
                         {
                             Console.WriteLine("Вводи");
@@ -37,12 +38,13 @@ namespace OOP
                                 person.ShowDescription();
                                 personList.Add(person);
                             }
-                           
                         }
+
                         Console.WriteLine("Ну все у нас " + personList.Count() + " пассажиров");
                         Console.WriteLine("Засовываем по вагонам!");
                         Random random = new Random();
-                        int freePlace = random.Next(1, 5);
+                        int freePlace = random.Next(2, 5);
+
                         if (freePlace >= personList.Count())
                         {
                             Console.WriteLine("Все всех запихнули в 1 вагон");
@@ -59,17 +61,22 @@ namespace OOP
                             Console.WriteLine("");
                             List<Carriage> carriageList = new List<Carriage>();
                             Console.WriteLine("епрст,надо несколько вагонов");
-                            for (int i = 0; i < personList.Count();)
+
+                            for (int i = 0; i <personList.Count();)
                             {
                                 Carriage carriage = new Carriage(personList, freePlace);
                                 carriageList.Add(carriage);
                                 i += freePlace;
-                                personList.RemoveRange(0, freePlace);
+                                personList.RemoveRange(0,freePlace);
                                 freePlace = random.Next(1, 5);
                             }
+                            Carriage carriage1 = new Carriage(personList, personList.Count());
+                            carriageList.Add(carriage1);
+                            
                             Train train = new Train(carriageList);
                             train.ShowTrainInfo();
                         }
+
                     break;
                         case 2:
                         Console.WriteLine("Адьос");
