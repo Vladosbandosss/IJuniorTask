@@ -8,42 +8,78 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            Person person = new Person("Влад");
-            Person person1 = new Person("Паша");
-            Person person2 = new Person("Рома");
-            Person person3 = new Person("Саша");
+            bool isWorking = true;
 
-            List<Person> personList = new List<Person>();
-            personList.Add(person);
-            personList.Add(person1);
-            personList.Add(person2);
-            personList.Add(person3);
+            while (isWorking)
+            {
+                Console.WriteLine("Добро пожаловать 1-что б отправить людей,2 выйти");
+                int userInput;
+                int.TryParse(Console.ReadLine(), out userInput);
 
-            Carriage carriage = new Carriage(personList, 3);
-            carriage.ReadyToMove();
+                switch (userInput)
+                {
+                    case 1:
+                        Console.WriteLine("Давай создавай пассажиров нажми exit что б прекратить");
+                        bool isCreating = true;
+                        List<Person> personList = new List<Person>();
+                        while (isCreating)
+                        {
+                            Console.WriteLine("Вводи");
+                            string userComand = Console.ReadLine();
 
-            Person person4 = new Person("зоя");
-            Person person5 = new Person("ян");
-            Person person6 = new Person("клава");
-            Person person7 = new Person("амир");
-            Person person8 = new Person("хуанито");
-
-            List<Person> personSecondList = new List<Person>();
-            personSecondList.Add(person4);
-            personSecondList.Add(person5);
-            personSecondList.Add(person6);
-            personSecondList.Add(person7);
-            personSecondList.Add(person8);
-
-            Carriage secondCarriage = new Carriage(personSecondList, 4);
-            secondCarriage.ReadyToMove();
-
-            List<Carriage> cariageList = new List<Carriage>();
-            cariageList.Add(carriage);
-            cariageList.Add(secondCarriage);
-            Console.WriteLine();
-            Train train = new Train(cariageList);
-            train.ShowTrainInfo();
+                            if (userComand == "exit")
+                            {
+                                isCreating = false;
+                            }
+                            else
+                            {
+                                Person person = new Person(userComand);
+                                person.ShowDescription();
+                                personList.Add(person);
+                            }
+                           
+                        }
+                        Console.WriteLine("Ну все у нас " + personList.Count() + " пассажиров");
+                        Console.WriteLine("Засовываем по вагонам!");
+                        Random random = new Random();
+                        int freePlace = random.Next(1, 5);
+                        if (freePlace >= personList.Count())
+                        {
+                            Console.WriteLine("Все всех запихнули в 1 вагон");
+                            Carriage carriage = new Carriage(personList,personList.Count());
+                            List<Carriage> onlyOneCarriage = new List<Carriage>();
+                            onlyOneCarriage.Add(carriage);
+                            Train train = new Train(onlyOneCarriage);
+                            carriage.ReadyToMove();
+                            train.ShowTrainInfo();
+                        }
+                       // ошибки запихивается примерно половина людей((((
+                        else
+                        {
+                            Console.WriteLine("");
+                            List<Carriage> carriageList = new List<Carriage>();
+                            Console.WriteLine("епрст,надо несколько вагонов");
+                            for (int i = 0; i < personList.Count();)
+                            {
+                                Carriage carriage = new Carriage(personList, freePlace);
+                                carriageList.Add(carriage);
+                                i += freePlace;
+                                personList.RemoveRange(0, freePlace);
+                                freePlace = random.Next(1, 5);
+                            }
+                            Train train = new Train(carriageList);
+                            train.ShowTrainInfo();
+                        }
+                    break;
+                        case 2:
+                        Console.WriteLine("Адьос");
+                        isWorking = false;
+                    break;
+                    default:
+                        Console.WriteLine("Ошибка");
+                    break;
+                }
+            }
         }
     }
     class Person
@@ -90,11 +126,8 @@ namespace OOP
         public Carriage(List<Person> personList,int size)
         {
             _size = size;
-            if (personList.Count() > _size)
-            {
-                Console.WriteLine("на всех не хватит)Заполню как смогу");
-            }
-            for (int i = 0; i < size; i++)
+
+            for (int i = 0; i < _size; i++)
             {
                 _listPerson.Add(personList[i]);
             }
