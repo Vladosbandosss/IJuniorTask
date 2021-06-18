@@ -8,135 +8,124 @@ namespace OOP
     {
         static void Main(string[] args)
         {
-            List<Warior> firstTeam = new List<Warior>();
-            firstTeam.AddRange(CreateTeam());
+            Person person = new Person("Влад");
+            Person person1 = new Person("Паша");
+            Person person2 = new Person("Рома");
+            Person person3 = new Person("Саша");
 
-            List<Warior> secondTeam = new List<Warior>();
-            secondTeam.AddRange(CreateTeam());
+            List<Person> personList = new List<Person>();
+            personList.Add(person);
+            personList.Add(person1);
+            personList.Add(person2);
+            personList.Add(person3);
 
-            FightPlace fightPlace = new FightPlace();
-            fightPlace.Fight(firstTeam, secondTeam);
+            Carriage carriage = new Carriage(personList, 3);
+            carriage.ReadyToMove();
 
-        }
+            Person person4 = new Person("зоя");
+            Person person5 = new Person("ян");
+            Person person6 = new Person("клава");
+            Person person7 = new Person("амир");
+            Person person8 = new Person("хуанито");
 
-        private static List<Warior> CreateTeam()
-        {
-            List<Warior> wariorsTeam = new List<Warior>();
-            Random random = new Random();
-            for (int i = 0; i < 3; i++)
-            {
-                int health = random.Next(50, 100);
-                int damage = random.Next(10, 16);
-                int armor = random.Next(1, 11);
-                Warior warior = new Warior(health, damage, armor);
-                wariorsTeam.Add(warior);
-            }
-             return wariorsTeam;
-        }
-    }
-       
-    class Warior : Hero {
-        private int _health;
-        private int _damage;
-        private int _armor;
-        private int _uniqueAtack;
+            List<Person> personSecondList = new List<Person>();
+            personSecondList.Add(person4);
+            personSecondList.Add(person5);
+            personSecondList.Add(person6);
+            personSecondList.Add(person7);
+            personSecondList.Add(person8);
 
-        public Warior(int health,int damage,int armor)
-        {
-            Random random = new Random();
-            _uniqueAtack = random.Next(1, 11);
-            _health = health;
-            _damage = damage;
-            _armor = armor;
-        }
+            Carriage secondCarriage = new Carriage(personSecondList, 4);
+            secondCarriage.ReadyToMove();
 
-        public int GetHealth()
-        {
-          return _health;
-        }
-
-        public int GetDamege()
-        {
-            return _damage;
-        }
-        public int GetArmor()
-        {
-            return _armor;
-        }
-        public int GetUnique()
-        {
-            return _uniqueAtack;
+            List<Carriage> cariageList = new List<Carriage>();
+            cariageList.Add(carriage);
+            cariageList.Add(secondCarriage);
+            Console.WriteLine();
+            Train train = new Train(cariageList);
+            train.ShowTrainInfo();
         }
     }
-      abstract class Hero
+    class Person
     {
-        public int superAbiliti;
-        public int SuperPower()
+        private string _name;
+        private bool _isHasTicket;
+
+       public Person(string name)
         {
-            Random random = new Random();
-            superAbiliti = random.Next(1, 11);
-            return superAbiliti;
+            _name = name;
+            _isHasTicket = false;
         }
-    }  
-
-    class FightPlace
-    {
-         public void Fight(List<Warior>firstTeam,List<Warior>secondTeam)
+        public bool GetTicket()
         {
-            Console.WriteLine("Начинаем бой!");
-            int firsTeamCount = 0;
-            int secondTeamCount = 0;
-
-            FightTeam(firstTeam, secondTeam, ref firsTeamCount, ref secondTeamCount);
-
-            Console.WriteLine("Бой завершен");
-
-            if (firsTeamCount > secondTeamCount)
+            return _isHasTicket;
+        }
+        public string GetName()
+        {
+            return _name;
+        }
+        public void ShowDescription()
+        {
+            string ticket = "";
+            if (_isHasTicket == true)
             {
-                Console.WriteLine("Победила первая команда");
-            }
-            else if (firsTeamCount < secondTeamCount)
-            {
-                Console.WriteLine("Победила вторая команда");
+                ticket = "у меня есть билет";
             }
             else
             {
-                Console.WriteLine("Ничья");
+                ticket = "у меня нет билета";
+            }
+            Console.WriteLine($"я {_name} {ticket}");
+        }
+        public void AddTicket()
+        {
+            _isHasTicket = true;
+        }
+    }
+    class Carriage
+    {
+       private int _size;
+       private List<Person> _listPerson = new List<Person>();
+
+        public Carriage(List<Person> personList,int size)
+        {
+            _size = size;
+            if (personList.Count() > _size)
+            {
+                Console.WriteLine("на всех не хватит)Заполню как смогу");
+            }
+            for (int i = 0; i < size; i++)
+            {
+                _listPerson.Add(personList[i]);
             }
         }
-
-        private static void FightTeam(List<Warior> firstTeam, List<Warior> secondTeam, ref int firsTeamCount, ref int secondTeamCount)
+        public void ReadyToMove()
         {
-            for (int i = 0; i < firstTeam.Count; i++)
+            for (int i = 0; i < _listPerson.Count; i++)
             {
-                bool isFight = true;
-                int firstTeamHealth = firstTeam[i].GetHealth() + firstTeam[i].superAbiliti;
-                int secondTeamHealth = secondTeam[i].GetHealth() + secondTeam[i].superAbiliti;
-                Fight(firstTeam, secondTeam, ref firsTeamCount, ref secondTeamCount, i, ref isFight, ref firstTeamHealth, ref secondTeamHealth);
+                _listPerson[i].AddTicket();
+                _listPerson[i].ShowDescription();
             }
         }
-        private static void Fight(List<Warior> firstTeam, List<Warior> secondTeam, ref int firsTeamCount, ref int secondTeamCount, int i, ref bool isFight, ref int firstTeamHealth, ref int secondTeamHealth)
-        {
-            while (isFight)
-            {
-                firstTeamHealth -= (secondTeam[i].GetDamege() + secondTeam[i].GetUnique()) + firstTeam[i].GetArmor();
-                secondTeamHealth -= (firstTeam[i].GetDamege() + firstTeam[i].GetUnique()) + secondTeam[i].GetArmor();
+    }
+    class Train
+    {
+        private List<Carriage> _carriageList = new List<Carriage>();
 
-                if (firstTeamHealth < 0 && secondTeamHealth > 0)
-                {
-                    secondTeamCount++;
-                    isFight = false;
-                }
-                if (firstTeamHealth > 0 && secondTeamHealth < 0)
-                {
-                    firsTeamCount++;
-                    isFight = false;
-                }
-                if (firstTeamHealth <= 0 && secondTeamHealth <= 0)
-                {
-                    isFight = false;
-                }
+        public Train(List<Carriage> list)
+        {
+            _carriageList.AddRange(list);
+        }
+        public void ShowTrainInfo()
+        {
+            for (int i = 0; i < _carriageList.Count(); i++)
+            {
+                Console.Write("Вагон" + (i+1) + " люди");
+                Console.WriteLine();
+                _carriageList[i].ReadyToMove();
+                Console.WriteLine();
             }
+            Console.WriteLine("Все я уехал!Адьес");
         }
     }
 }
