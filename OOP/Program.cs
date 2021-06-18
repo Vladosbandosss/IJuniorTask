@@ -54,7 +54,7 @@ namespace OOP
                             onlyOneCarriage.Add(carriage);
                             Train train = new Train(onlyOneCarriage);
                             carriage.ReadyToMove();
-                            train.ShowTrainInfo();
+                            train.ShowInfo();
                         }
                         else
                         {
@@ -74,7 +74,7 @@ namespace OOP
                             carriageList.Add(carriage1);
                             
                             Train train = new Train(carriageList);
-                            train.ShowTrainInfo();
+                            train.ShowInfo();
                             Console.WriteLine("Поезд в рейсе");
                         }
 
@@ -100,7 +100,7 @@ namespace OOP
             _name = name;
             _isHasTicket = false;
         }
-        public bool GetTicket()
+        public bool CheckTicket()
         {
             return _isHasTicket;
         }
@@ -157,7 +157,7 @@ namespace OOP
         {
             _carriageList.AddRange(list);
         }
-        public void ShowTrainInfo()
+        public void ShowInfo()
         {
             for (int i = 0; i < _carriageList.Count(); i++)
             {
