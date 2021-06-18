@@ -12,6 +12,7 @@ namespace OOP
 
             while (isWorking)
             {
+                Console.WriteLine("Поезда свободны");
                 Console.WriteLine("Добро пожаловать 1-что б отправить людей,2 выйти");
                 int userInput;
                 int.TryParse(Console.ReadLine(), out userInput);
@@ -55,7 +56,6 @@ namespace OOP
                             carriage.ReadyToMove();
                             train.ShowTrainInfo();
                         }
-                       // ошибки запихивается примерно половина людей((((
                         else
                         {
                             Console.WriteLine("");
@@ -75,6 +75,7 @@ namespace OOP
                             
                             Train train = new Train(carriageList);
                             train.ShowTrainInfo();
+                            Console.WriteLine("Поезд в рейсе");
                         }
 
                     break;
