@@ -9,7 +9,7 @@ namespace OOP4
         {
             bool isShopWorking = true;
 
-            Shop shop = CreateCustomers();
+            Shop shop = CreateShopCustomers();
 
             while (isShopWorking)
             {
@@ -33,7 +33,7 @@ namespace OOP4
             }
         }
 
-        private static Shop CreateCustomers()
+        private static Shop CreateShopCustomers()
         {
             Product productChease = new Product("Сыр", 100);
             Product productMilk = new Product("Молоко", 150);
@@ -77,19 +77,23 @@ namespace OOP4
             _name = name;
             _price = price;
         }
+
         public string GetName()
         {
             return _name;
         }
+
         public int GetPrice()
         {
             return _price;
         }
+
         public void ShowDescription()
         {
             Console.WriteLine($"{_name} цена {_price} р");
         }
     }
+
     class Customer
     {
         private int _money;
@@ -100,7 +104,8 @@ namespace OOP4
             _money = money;
             _productsList.AddRange(products);
         }
-        public void Info()
+
+        public void ShowInfo()
         {
             Console.WriteLine($"У меня есть {_money} р");
             Console.WriteLine("Вот мой список продуктов");
@@ -110,11 +115,13 @@ namespace OOP4
                 _productsList[i].ShowDescription();
             }
         }
+
         public int GetMyMoney()
         {
             return _money;
         }
-        public int PriceForGoogs()
+
+        public int GetGoodsPrice()
         {
             int moneyForPrice = 0;
 
@@ -125,6 +132,7 @@ namespace OOP4
 
             return moneyForPrice;
         }
+
        public void RemoveGoog()
         {
             Random random = new Random();
@@ -135,6 +143,7 @@ namespace OOP4
             }
         }
     }
+
     class Shop
     {
         private List<Customer> _customers = new List<Customer>();
@@ -148,16 +157,16 @@ namespace OOP4
         {
             for (int i = 0; i < _customers.Count;)
             {
-                if (_customers[i].GetMyMoney() >= _customers[i].PriceForGoogs())
+                if (_customers[i].GetMyMoney() >= _customers[i].GetGoodsPrice())
                 {
-                    Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].PriceForGoogs());
+                    Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].GetGoodsPrice());
                     Console.WriteLine("Покупка прошла успешно!");
                     _customers.RemoveAt(i);
                     //i++;
                 }
                 else
                 {
-                   Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].PriceForGoogs());
+                   Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].GetGoodsPrice());
                     Console.WriteLine("Нешта ты много набрал,ща выкину что нибудь");
                     _customers[i].RemoveGoog();
                     i++;
