@@ -156,16 +156,16 @@ namespace OOP4
         {
             for (int i = 0; i < _customers.Count;)
             {
+                Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].GetProductsPrice());
+
                 if (_customers[i].GetMyMoney() >= _customers[i].GetProductsPrice())
                 {
-                    Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].GetProductsPrice());
                     Console.WriteLine("Покупка прошла успешно!");
                     _customers.RemoveAt(i);
                     //i++;
                 }
                 else
                 {
-                   Console.WriteLine("У нас есть " + _customers[i].GetMyMoney() + " сумма покупок " + _customers[i].GetProductsPrice());
                     Console.WriteLine("Нешта ты много набрал,ща выкину что нибудь");
                     while(_customers[i].GetMyMoney() <= _customers[i].GetProductsPrice())
                     {
