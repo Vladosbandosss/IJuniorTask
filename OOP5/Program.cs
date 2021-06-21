@@ -189,8 +189,9 @@ namespace OOP5
                         Console.WriteLine("теперь у нас нету "); 
                         _listServiceDeatails[j].ShowDescription();
                         _listServiceDeatails.RemoveAt(j);
-                        break;
                         isGoorRepaire++;
+                        break;
+                        
                     }                
                 }
                 if (isGoorRepaire == 0)
