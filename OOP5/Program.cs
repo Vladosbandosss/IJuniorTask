@@ -171,15 +171,17 @@ namespace OOP5
         
         public void MakeRepair()
         {
+            int fine = 50;
             int serviceMoney = GetMoney();
             Console.WriteLine("Наш баланс " + serviceMoney);
 
             for (int i = 0; i < _listClientsCar.Count; i++)
             {
                 _listClientsCar[i].ShowProblem();
-
+                int isGoorRepaire = 0;
                 for (int j = 0; j < _listServiceDeatails.Count; j++)
                 {
+                   
                     if (_listServiceDeatails[j].GetPrice() == _listClientsCar[i].GetBrokenDeatail().GetPrice() && _listServiceDeatails[j].GetPrice()<=_listClientsCar[i].GetMoney())
                     {
                         Console.WriteLine("Починил!");
@@ -188,15 +190,15 @@ namespace OOP5
                         _listServiceDeatails[j].ShowDescription();
                         _listServiceDeatails.RemoveAt(j);
                         break;
-
-                    }
-                    //else
-                   // {
-                     //   Console.WriteLine("извините не получилось(заплачу вам штраф");
-                    //    serviceMoney -= fine;
-                   // }
+                        isGoorRepaire++;
+                    }                
                 }
-
+                if (isGoorRepaire == 0)
+                {
+                    serviceMoney -= fine;
+                    Console.WriteLine("Ремонт не удался плачу штраф");
+                }
+                
                 Console.WriteLine("Закончил,теперь у нас " + serviceMoney + " денег");
             }
             Console.WriteLine("теперь у нас " + serviceMoney + " вот какие детали остались");
