@@ -191,7 +191,6 @@ namespace OOP5
                         _listServiceDeatails.RemoveAt(j);
                         isGoorRepaire++;
                         break;
-                        
                     }                
                 }
                 if (isGoorRepaire == 0)
