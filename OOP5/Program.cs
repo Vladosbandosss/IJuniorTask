@@ -191,7 +191,7 @@ namespace OOP5
             for (int i = 0; i < _listClientsCar.Count; i++)
             {
                 _listClientsCar[i].ShowProblem();
-                int isGoodRepaire = 0;
+                int countGoodRepaire = 0;
 
                 for (int j = 0; j < _listServiceDeatails.Count; j++)
                 {
@@ -202,12 +202,12 @@ namespace OOP5
                         Console.WriteLine("теперь у нас нету "); 
                         _listServiceDeatails[j].ShowDescription();
                         _listServiceDeatails.RemoveAt(j);
-                        isGoodRepaire++;
+                        countGoodRepaire++;
                         break;
                     }                
                 }
 
-                if (isGoodRepaire == 0)
+                if (countGoodRepaire == 0)
                 {
                     serviceMoney -= fine;
                     Console.WriteLine("Ремонт не удался плачу штраф");
