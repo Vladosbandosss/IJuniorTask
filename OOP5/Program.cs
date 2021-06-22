@@ -5,6 +5,8 @@ namespace OOP5
 {
     class Program
     {
+        //Когда приезжает автомобиль, у него сразу ясна его поломка, и эта поломка отображается у вас в консоли вместе с ценой за починку(
+        //в программе сразу ясна поломка ,пользователю не надо выбирать что у него поломалось)
         static void Main(string[] args)
         {
            CarServise carServise = new CarServise(200);
@@ -123,11 +125,13 @@ namespace OOP5
     class CarServise
     {
         private int _serviceMoney;
-        private List<Detail> _listServiceDeatails = new List<Detail>();
-        private List<ClientCar> _listClientsCar = new List<ClientCar>();
+        private List<Detail> _listServiceDeatails; 
+        private List<ClientCar> _listClientsCar;
 
         public CarServise(int serviseMoney)
         {
+            _listServiceDeatails = new List<Detail>();
+            _listClientsCar = new List<ClientCar>();
             List<ClientCar> clientsList = CreateClientList();
 
             List<Detail> detailList = CreateDetails();
