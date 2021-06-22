@@ -123,7 +123,7 @@ namespace OOP5
     class CarServise
     {
         private int _serviceMoney;
-        public List<Detail> _listServiceDeatails = new List<Detail>();
+        private List<Detail> _listServiceDeatails = new List<Detail>();
         private List<ClientCar> _listClientsCar = new List<ClientCar>();
 
         public CarServise(int serviseMoney)
@@ -136,19 +136,16 @@ namespace OOP5
             _listClientsCar.AddRange(clientsList);
         }
 
-        private static List<ClientCar> CreateClientList()
+        private List<ClientCar> CreateClientList()
         {
-            ClientCar firstClientCar = new ClientCar(150, new Detail(100, RosterDetails.Wheel));
-            ClientCar secondClientCar = new ClientCar(50, new Detail(150, RosterDetails.Hood));
-            ClientCar thirdClientCar = new ClientCar(200, new Detail(200, RosterDetails.Trunk));
             List<ClientCar> clientsList = new List<ClientCar>();
-            clientsList.Add(firstClientCar);
-            clientsList.Add(secondClientCar);
-            clientsList.Add(thirdClientCar);
+            clientsList.Add(new ClientCar(150, new Detail(100, RosterDetails.Wheel)));
+            clientsList.Add(new ClientCar(50, new Detail(150, RosterDetails.Hood)));
+            clientsList.Add(new ClientCar(200, new Detail(200, RosterDetails.Trunk)));
             return clientsList;
         }
 
-        private static List<Detail> CreateDetails()
+        private List<Detail> CreateDetails()
         {
             Detail detailWhell = new Detail(100, RosterDetails.Wheel);
             Detail detailHood = new Detail(150, RosterDetails.Hood);
